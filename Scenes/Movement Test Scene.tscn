@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 22.6
+lacunarity = 3.08
+
+[sub_resource type="NoiseTexture" id=2]
+width = 128
+height = 128
+noise = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 64 )
+
+[node name="Movement test" type="Node2D"]
+
+[node name="Box" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Box"]
+position = Vector2( 492, 266 )
+texture = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box"]
+position = Vector2( 492, 266 )
+shape = SubResource( 3 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 170, 258 )
