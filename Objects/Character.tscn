@@ -241,13 +241,15 @@ states/walk_up/node = SubResource( 17 )
 states/walk_up/position = Vector2( 553, -128.922 )
 transitions = [ "idle_right", "walk_right", SubResource( 18 ), "walk_right", "idle_right", SubResource( 19 ), "idle_right", "idle_up", SubResource( 20 ), "idle_up", "idle_right", SubResource( 21 ), "idle_right", "idle_down", SubResource( 22 ), "idle_down", "idle_right", SubResource( 23 ), "idle_down", "idle_up", SubResource( 24 ), "idle_up", "idle_down", SubResource( 25 ), "idle_left", "idle_right", SubResource( 26 ), "idle_right", "idle_left", SubResource( 27 ), "idle_up", "idle_left", SubResource( 28 ), "idle_left", "idle_up", SubResource( 29 ), "idle_down", "idle_left", SubResource( 30 ), "idle_left", "idle_down", SubResource( 31 ), "idle_up", "walk_up", SubResource( 32 ), "walk_up", "idle_up", SubResource( 33 ), "idle_down", "walk_down", SubResource( 34 ), "walk_down", "idle_down", SubResource( 35 ), "walk_left", "idle_left", SubResource( 36 ), "idle_left", "walk_left", SubResource( 37 ) ]
 start_node = "idle_down"
-graph_offset = Vector2( -130, 105.738 )
+graph_offset = Vector2( 71.7647, -177.065 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=39]
 
 [sub_resource type="CapsuleShape2D" id=40]
 
 [node name="Character" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

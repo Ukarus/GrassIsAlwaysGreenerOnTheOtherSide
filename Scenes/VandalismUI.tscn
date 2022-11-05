@@ -8,33 +8,55 @@
 margin_right = 1026.0
 margin_bottom = 608.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PanelContainer" type="PanelContainer" parent="Control"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -417.0
-margin_top = -217.0
-margin_right = 414.0
+margin_left = -429.0
+margin_top = -278.0
+margin_right = -197.0
 
-[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer"]
+[node name="ItemList" type="ItemList" parent="Control/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 824.0
-margin_bottom = 210.0
-columns = 2
+margin_right = 225.0
+margin_bottom = 271.0
+items = [ "Kick Gnomes", null, false, "BurnPine", null, false ]
+auto_height = true
+icon_scale = 0.5
+fixed_icon_size = Vector2( 40, 0 )
 
-[node name="Action1" type="Button" parent="Control/PanelContainer/GridContainer"]
-margin_right = 74.0
+[node name="VSplitContainer" type="VSplitContainer" parent="Control/PanelContainer"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 213.0
+margin_bottom = 308.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Action1" type="Button" parent="Control/PanelContainer/VSplitContainer"]
+margin_right = 206.0
 margin_bottom = 20.0
 text = "Burn Pine"
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Action2" type="Button" parent="Control/PanelContainer/GridContainer"]
-margin_left = 78.0
-margin_right = 167.0
-margin_bottom = 20.0
+[node name="Action2" type="Button" parent="Control/PanelContainer/VSplitContainer"]
+margin_top = 32.0
+margin_right = 206.0
+margin_bottom = 301.0
 text = "Kick Gnome"
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NeighborBar" type="ProgressBar" parent="Control"]
 anchor_left = 1.0
@@ -59,4 +81,4 @@ margin_right = -143.0
 margin_bottom = -11.0
 text = "Terry neighbor"
 
-[connection signal="pressed" from="Control/PanelContainer/GridContainer/Action1" to="Control" method="_on_Action1_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VSplitContainer/Action1" to="Control" method="_on_Action1_pressed"]

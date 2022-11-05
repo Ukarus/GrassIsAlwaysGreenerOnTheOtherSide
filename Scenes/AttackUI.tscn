@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/uipack_fixed/PNG/blue_button13.png" type="Texture" id=1]
+[ext_resource path="res://Theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/uipack_fixed/PNG/blue_button00.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/AttackUI.gd" type="Script" id=4]
+
+[node name="AttackUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="ItemList" type="ItemList" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = -332.0
+margin_right = 376.0
+margin_bottom = -32.0
+theme = ExtResource( 2 )
+icon_scale = 0.5
+
+[node name="Bar" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -201.0
+margin_top = -35.5
+margin_bottom = 35.5
+
+[node name="TextureProgress" type="TextureProgress" parent="Bar"]
+margin_right = 201.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 200, 0 )
+value = 100.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Bar"]
+margin_top = 53.0
+margin_right = 201.0
+margin_bottom = 71.0
+theme = ExtResource( 2 )
+text = "House 1"
+align = 1
+valign = 1
+
+[connection signal="item_activated" from="ItemList" to="." method="_on_ItemList_item_activated"]

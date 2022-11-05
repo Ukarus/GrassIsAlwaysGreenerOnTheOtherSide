@@ -4,15 +4,30 @@ var speed = 300
 var directions = ["idle_down","idle_up","idle_left","idle_right"]
 var dir = 0
 var state_machine
+var can_move = true
+
+# TODO: Current attacks (vandalic actions) on a list
+# TODO: pass info of current attacks to attackUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	state_machine.start("idle_down")
-	pass # Replace with function body.
+
+func stop_movement():
+	can_move = false
+
+func allow_movement():
+	can_move = true
+	
+func go_to_idle():
+	state_machine.travel(directions[dir])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _physics_process(_delta):
+	if !can_move:
+		return
+		
 	if Input.is_action_pressed("move_down"):
 		move_down()
 	elif Input.is_action_pressed("move_up"):
