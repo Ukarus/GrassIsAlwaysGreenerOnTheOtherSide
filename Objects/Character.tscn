@@ -405,7 +405,6 @@ position = Vector2( 0, 7 )
 shape = SubResource( 40 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="HitBoxArea" type="Area2D" parent="."]
 position = Vector2( -20, 10 )

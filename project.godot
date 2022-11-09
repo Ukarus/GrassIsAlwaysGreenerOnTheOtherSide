@@ -14,6 +14,10 @@ config/name="GrassIsAlwaysGreenerOnTheOtherSide"
 run/main_scene="res://Scenes/Movement Test Scene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerGlobalData="*res://Scripts/PlayerGlobalData.gd"
+
 [editor]
 
 version_control_autoload_on_startup=true

@@ -9,6 +9,10 @@ onready var character = $Character
 func _ready():
 	attack_ui.hide()
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
+	character.position = PlayerGlobalData.player_neighbour_pos
+	
+func _process(delta):
+	PlayerGlobalData.player_neighbour_pos = character.position
 
 func go_back_to_map():
 	attack_ui.hide()
