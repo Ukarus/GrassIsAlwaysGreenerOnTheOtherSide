@@ -6,6 +6,28 @@ var dir = 0
 var state_machine
 var can_move = true
 
+var vector_directions = {
+	"down": Vector2.DOWN,
+	"up": Vector2.UP,
+	"left": Vector2.LEFT,
+	"right": Vector2.RIGHT
+}
+var directions_statemachine = {
+	"down": 0,
+	"up": 1,
+	"left": 2,
+	"right": 3
+}
+var hitbox_dir = {
+	"down": Vector2(0, 35),
+	"up": Vector2(0, -20),
+	"right": Vector2(20, 10),
+	"left": Vector2(-20, 10),
+}
+var objects = []
+
+onready var hitbox = $HitBoxArea
+
 # TODO: Current attacks (vandalic actions) on a list
 # TODO: pass info of current attacks to attackUI
 
@@ -13,6 +35,7 @@ var can_move = true
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	state_machine.start("idle_down")
+	move_hitbox("down")
 
 func stop_movement():
 	can_move = false
@@ -29,53 +52,40 @@ func _physics_process(_delta):
 		return
 		
 	if Input.is_action_pressed("move_down"):
-		move_down()
+		move_to_direction("down")
+		move_hitbox("down")
 	elif Input.is_action_pressed("move_up"):
-		move_up()
+		move_to_direction("up")
+		move_hitbox("up")
 	elif Input.is_action_pressed("move_left"):
-		move_left()
+		move_to_direction("left")
+		move_hitbox("left")
 	elif Input.is_action_pressed("move_right"):
-		move_right()
+		move_to_direction("right")
+		move_hitbox("right")
+	elif Input.is_action_just_pressed("use_object"):
+		for obj in objects:
+			obj.destroy_object()
+#			objects[i].destroy_object()
 	else:
 		state_machine.travel(directions[dir])
-	pass
+		
+func move_hitbox(direction: String):
+	hitbox.position = hitbox_dir[direction]
 
-
-func move_down():
-	var velocity = move_and_slide(Vector2(0.0,1.0) * speed)
+func move_to_direction(direction: String):
+	var velocity = move_and_slide(vector_directions[direction] * speed)
 	# Check that we're moving
 	if velocity.length_squared() > 0.5:
-		state_machine.travel("walk_down")
+		state_machine.travel("walk_" + direction)
 	else:
-		state_machine.travel("idle_down")
-	dir = 0
-	pass
+		state_machine.travel("idle_" + direction)
+	dir = directions_statemachine[direction]
 
-func move_up():
-	var velocity = move_and_slide(Vector2(0.0,-1.0) * speed)
-	# Check that we're moving
-	if velocity.length_squared() > 0.5:
-		state_machine.travel("walk_up")
-	else:
-		state_machine.travel("idle_up")
-	dir = 1
-	pass
+func _on_HitBoxArea_body_entered(body):
+	print(body)
+	objects.append(body)
 
-func move_left():
-	var velocity = move_and_slide(Vector2(-1.0,0.0) * speed)
-	# Check that we're moving
-	if velocity.length_squared() > 0.5:
-		state_machine.travel("walk_left")
-	else:
-		state_machine.travel("idle_left")
-	dir = 2
-	pass
 
-func move_right():
-	var velocity = move_and_slide(Vector2(1.0,0.0) * speed)
-	if velocity.length_squared() > 0.5:
-		state_machine.travel("walk_right")
-	else:
-		state_machine.travel("idle_right")
-	dir = 3
-	pass
+func _on_HitBoxArea_body_exited(body):
+	objects.pop_back()

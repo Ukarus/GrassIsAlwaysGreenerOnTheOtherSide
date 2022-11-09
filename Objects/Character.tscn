@@ -1,7 +1,46 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Images/male_walkcycle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=2]
+[ext_resource path="res://Assets/male_slash.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 128, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 256, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 320, 192, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=48]
+animations = [ {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"loop": true,
+"name": "slash_right",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -16,6 +55,42 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "slash_right" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitBoxArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -84,6 +159,47 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "slash_right"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "slash_right" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitBoxArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false, false, true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -241,11 +357,14 @@ states/walk_up/node = SubResource( 17 )
 states/walk_up/position = Vector2( 553, -128.922 )
 transitions = [ "idle_right", "walk_right", SubResource( 18 ), "walk_right", "idle_right", SubResource( 19 ), "idle_right", "idle_up", SubResource( 20 ), "idle_up", "idle_right", SubResource( 21 ), "idle_right", "idle_down", SubResource( 22 ), "idle_down", "idle_right", SubResource( 23 ), "idle_down", "idle_up", SubResource( 24 ), "idle_up", "idle_down", SubResource( 25 ), "idle_left", "idle_right", SubResource( 26 ), "idle_right", "idle_left", SubResource( 27 ), "idle_up", "idle_left", SubResource( 28 ), "idle_left", "idle_up", SubResource( 29 ), "idle_down", "idle_left", SubResource( 30 ), "idle_left", "idle_down", SubResource( 31 ), "idle_up", "walk_up", SubResource( 32 ), "walk_up", "idle_up", SubResource( 33 ), "idle_down", "walk_down", SubResource( 34 ), "walk_down", "idle_down", SubResource( 35 ), "walk_left", "idle_left", SubResource( 36 ), "idle_left", "walk_left", SubResource( 37 ) ]
 start_node = "idle_down"
-graph_offset = Vector2( 71.7647, -177.065 )
+graph_offset = Vector2( 71.7647, -163.471 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=39]
 
 [sub_resource type="CapsuleShape2D" id=40]
+
+[sub_resource type="CapsuleShape2D" id=41]
+height = 0.0
 
 [node name="Character" type="KinematicBody2D"]
 collision_layer = 4
@@ -258,12 +377,18 @@ hframes = 9
 vframes = 4
 frame = 18
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 48 )
+animation = "slash_right"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/idle_down = SubResource( 1 )
 anims/idle_left = SubResource( 5 )
 anims/idle_right = SubResource( 6 )
 anims/idle_up = SubResource( 2 )
+anims/slash_right = SubResource( 49 )
 anims/walk_down = SubResource( 7 )
 anims/walk_left = SubResource( 8 )
 anims/walk_right = SubResource( 9 )
@@ -278,3 +403,23 @@ parameters/playback = SubResource( 39 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
 shape = SubResource( 40 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="HitBoxArea" type="Area2D" parent="."]
+position = Vector2( -20, 10 )
+collision_layer = 0
+collision_mask = 8
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea"]
+shape = SubResource( 41 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="HitBoxArea" to="." method="_on_HitBoxArea_body_entered"]
+[connection signal="body_exited" from="HitBoxArea" to="." method="_on_HitBoxArea_body_exited"]

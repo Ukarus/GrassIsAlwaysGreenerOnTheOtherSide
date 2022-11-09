@@ -1,5 +1,6 @@
 extends Control
 
+export (PackedScene) var garden_scene
 
 var attacks = [
 	"Kick gnomes",
@@ -47,12 +48,13 @@ func _input(event):
 # TODO: Check for amount of attacks that can be done
 func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
-	print(option)
+	
 	if option == "Vandal Attack":
-		active_submenu = SUBMENUS.ATTACK
-		item_list.clear()
-		add_attacks()
-		set_focus_on_attacks()
+		get_tree().change_scene_to(garden_scene)
+#		active_submenu = SUBMENUS.ATTACK
+#		item_list.clear()
+#		add_attacks()
+#		set_focus_on_attacks()
 	elif option == "Back":
 		emit_signal("flee_from_fight")
 	elif option == "Stats":
