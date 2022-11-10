@@ -10,6 +10,7 @@ func _ready():
 	attack_ui.hide()
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
 	character.position = PlayerGlobalData.player_neighbour_pos
+	$Box.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")
 	
 func _process(delta):
 	PlayerGlobalData.player_neighbour_pos = character.position

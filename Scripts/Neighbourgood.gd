@@ -1,9 +1,9 @@
 extends Node
 
-var player_neighbour_pos = Vector2(170, 258)
 
-var inventory = []
-
+var houses = [
+	
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

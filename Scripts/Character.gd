@@ -65,8 +65,7 @@ func _physics_process(_delta):
 		move_hitbox("right")
 	elif Input.is_action_just_pressed("use_object"):
 		for obj in objects:
-			obj.destroy_object()
-#			objects[i].destroy_object()
+			obj.damage()
 	else:
 		state_machine.travel(directions[dir])
 		
