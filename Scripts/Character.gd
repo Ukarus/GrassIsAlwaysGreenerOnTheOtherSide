@@ -82,7 +82,6 @@ func move_to_direction(direction: String):
 	dir = directions_statemachine[direction]
 
 func _on_HitBoxArea_body_entered(body):
-	print(body)
 	objects.append(body)
 
 

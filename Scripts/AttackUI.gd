@@ -7,11 +7,13 @@ var attacks = [
 	"Burn Pine"
 ]
 var options = [
-	"Vandal Attack",
+	"Attack",
 	"Stats",
 	"Back"
 ]
 onready var item_list = $VSplitContainer/ItemList
+onready var house_label = $VSplitContainer/Label
+onready var house_bar = $VSplitContainer/PopularityContainer/PopularityBar
 enum SUBMENUS {OPTIONS, ATTACK, STATS}
 var active_submenu = SUBMENUS.OPTIONS
 
@@ -21,6 +23,13 @@ signal flee_from_fight
 func _ready():
 	add_options()
 	set_focus_on_attacks()
+	
+	
+func set_house_label():
+	var current_house = Neighbourgood.current_house
+	house_label.text = current_house.houseName
+	house_bar.value = current_house.current_beauty_points
+	house_bar.max_value = current_house.max_beauty_points 
 
 func set_focus_on_attacks():
 	item_list.grab_focus()
@@ -49,7 +58,7 @@ func _input(event):
 func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
 	
-	if option == "Vandal Attack":
+	if option == "Attack":
 		get_tree().change_scene_to(garden_scene)
 #		active_submenu = SUBMENUS.ATTACK
 #		item_list.clear()

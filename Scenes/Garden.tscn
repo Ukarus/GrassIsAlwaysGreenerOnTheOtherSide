@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/grass.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/GardenObject.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Garden.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/CountdownUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/GardenAttackUI.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grass.png 0"
@@ -52,9 +52,9 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[node name="Garden" type="Node2D"]
+[node name="Garden" type="Node"]
 script = ExtResource( 4 )
-garden_timer = 60
+garden_timer = 15
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 517, 297 )
@@ -72,8 +72,6 @@ position = Vector2( 795, 329 )
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="CountdownUI" parent="." instance=ExtResource( 5 )]
-margin_left = 517.0
-margin_right = 517.0
+[node name="GardenAttackUI" parent="." instance=ExtResource( 5 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

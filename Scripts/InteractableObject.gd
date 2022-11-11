@@ -2,6 +2,7 @@ extends StaticBody2D
 
 export (int) var points = 3
 export (int) var resistance = 1
+var is_destroyed : bool = false
 
 
 signal poup_points
@@ -11,8 +12,10 @@ func destroy_object():
 	$AnimationPlayer.play("die")
 
 func damage():
-	resistance -= 1
-	$AnimationPlayer.play("dmg")
-	if resistance <= 0:
-		destroy_object()
+	if !is_destroyed:
+		resistance -= 1
+		$AnimationPlayer.play("dmg")
+		if resistance <= 0:
+			is_destroyed = true
+			destroy_object()
 		

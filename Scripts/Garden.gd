@@ -1,12 +1,18 @@
-extends Node2D
+extends Node
 
 export (int) var garden_timer = 30
-onready var timer_label = $CountdownUI/CountdownLabel
+onready var timer_label = $GardenAttackUI/CountdownLabel
+onready var house_label = $GardenAttackUI/HouseContainer/Label
+onready var house_bar = $GardenAttackUI/HouseContainer/CenterContainer/HouseBar
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
+	# TODO: Fix this thing
+#	var current_house = Neighbourgood.current_house
+#	if current_house != null:
+#		house_bar.value = current_house.current_beauty_points
+#		house_bar.max_value = current_house.max_beauty_points
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
