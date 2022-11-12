@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Objects/Doggo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Camera.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 1024, 603, 490, 605, 493, 372, 545, 372, 1027, -2, 544, 256, 1, 2, 430, 255, -1, 600, 429, 371, 489, 603, 492, 372 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 6, 4, 5, 7 ), PoolIntArray( 8, 6, 7, 9 ), PoolIntArray( 10, 8, 9, 11 ) ]
+outlines = [ PoolVector2Array( 1, 2, -1, 600, 489, 603, 492, 372, 429, 371, 430, 255, 544, 256, 545, 372, 493, 372, 490, 605, 1024, 603, 1027, -2 ) ]
+
+[node name="Doggo Test" type="Node2D"]
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="Doggo" parent="Navigation2D" instance=ExtResource( 1 )]
+position = Vector2( 253, 191 )
+running = true
+
+[node name="Patrol" type="Node2D" parent="Navigation2D"]
+position = Vector2( 253, 191 )
+
+[node name="Position2D" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
+position = Vector2( -13, 238 )
+
+[node name="Position2D2" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
+position = Vector2( 480, 8 )
+
+[node name="Position2D3" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
+position = Vector2( 495, 259 )
+
+[node name="Position2D4" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
+position = Vector2( 0, -5 )
+
+[node name="Sprite" type="StaticBody2D" parent="Navigation2D"]
+position = Vector2( 486, 315 )
+
+[node name="Sprite" type="Sprite" parent="Navigation2D/Sprite"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Navigation2D/Sprite"]
+shape = SubResource( 2 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 3 )
+
+[node name="Camera" parent="." instance=ExtResource( 3 )]
+position = Vector2( 474, 89 )
+min_rotation = -45.0
+max_rotation = 45.0
+fixed_angle = true
+angle = 45.0

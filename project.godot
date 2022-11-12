@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerGlobalData="*res://Scripts/PlayerGlobalData.gd"
+Neighbourgood="*res://Scripts/Neighbourgood.gd"
 
 [editor]
 
