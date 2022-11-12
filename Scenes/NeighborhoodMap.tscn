@@ -1,7 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/MapScript.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/PanelMapScript.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/LabelScript.gd" type="Script" id=4]
 
@@ -36,6 +35,10 @@ tracks/0/keys = {
 "values": [ Color( 0.0705882, 0.0705882, 0.0705882, 0 ), Color( 0.0705882, 0.0705882, 0.0705882, 1 ) ]
 }
 
+[sub_resource type="StreamTexture" id=4]
+flags = 4
+load_path = "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 31.5, 32 )
 
@@ -53,7 +56,7 @@ script = ExtResource( 3 )
 
 [node name="House1Sprite" type="Sprite" parent="Panel"]
 position = Vector2( 223, 196 )
-texture = ExtResource( 2 )
+texture = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="Panel/House1Sprite"]
 __meta__ = {
