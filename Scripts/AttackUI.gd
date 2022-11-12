@@ -27,9 +27,9 @@ func _ready():
 	
 func set_house_label():
 	var current_house = Neighbourgood.current_house
-	house_label.text = current_house.houseName
+	house_label.text = current_house.name
 	house_bar.value = current_house.current_beauty_points
-	house_bar.max_value = current_house.max_beauty_points 
+	house_bar.max_value = 100 
 
 func set_focus_on_attacks():
 	item_list.grab_focus()

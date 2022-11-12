@@ -14,7 +14,7 @@ func _ready():
 	var houses = $Houses.get_children()
 	for h in houses:
 		h.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")
-		Neighbourgood.houses.append(h)
+		Neighbourgood.add_house(h)
 		
 	
 func _process(delta):
@@ -25,7 +25,7 @@ func go_back_to_map():
 	character.allow_movement()
 
 func _on_HouseDetectRadius_body_entered(house):
-	Neighbourgood.current_house = house
+	Neighbourgood.set_current_house(house.houseName)
 #	print(Neighbourgood.current_house.beauty_points)
 	character.stop_movement()
 	character.go_to_idle()
