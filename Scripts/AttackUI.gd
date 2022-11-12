@@ -1,16 +1,19 @@
 extends Control
 
+export (PackedScene) var garden_scene
 
 var attacks = [
 	"Kick gnomes",
 	"Burn Pine"
 ]
 var options = [
-	"Vandal Attack",
+	"Attack",
 	"Stats",
 	"Back"
 ]
 onready var item_list = $VSplitContainer/ItemList
+onready var house_label = $VSplitContainer/Label
+onready var house_bar = $VSplitContainer/PopularityContainer/PopularityBar
 enum SUBMENUS {OPTIONS, ATTACK, STATS}
 var active_submenu = SUBMENUS.OPTIONS
 
@@ -20,6 +23,13 @@ signal flee_from_fight
 func _ready():
 	add_options()
 	set_focus_on_attacks()
+	
+	
+func set_house_label():
+	var current_house = Neighbourgood.current_house
+	house_label.text = current_house.name
+	house_bar.value = current_house.current_beauty_points
+	house_bar.max_value = 100 
 
 func set_focus_on_attacks():
 	item_list.grab_focus()
@@ -47,12 +57,13 @@ func _input(event):
 # TODO: Check for amount of attacks that can be done
 func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
-	print(option)
-	if option == "Vandal Attack":
-		active_submenu = SUBMENUS.ATTACK
-		item_list.clear()
-		add_attacks()
-		set_focus_on_attacks()
+	
+	if option == "Attack":
+		get_tree().change_scene_to(garden_scene)
+#		active_submenu = SUBMENUS.ATTACK
+#		item_list.clear()
+#		add_attacks()
+#		set_focus_on_attacks()
 	elif option == "Back":
 		emit_signal("flee_from_fight")
 	elif option == "Stats":
