@@ -27,6 +27,7 @@ var hitbox_dir = {
 var objects = []
 
 onready var hitbox = $HitBoxArea
+onready var camera = $Camera2D
 
 # TODO: Current attacks (vandalic actions) on a list
 # TODO: pass info of current attacks to attackUI
@@ -80,10 +81,18 @@ func move_to_direction(direction: String):
 	else:
 		state_machine.travel("idle_" + direction)
 	dir = directions_statemachine[direction]
+	
+func set_camera_limits(left: float, 
+	right: float, 
+	up: float, 
+	down: float):
+	camera.limit_left = left
+	camera.limit_right = right
+	camera.limit_top = up
+	camera.limit_bottom = down
 
 func _on_HitBoxArea_body_entered(body):
 	objects.append(body)
-
 
 func _on_HitBoxArea_body_exited(body):
 	objects.pop_back()

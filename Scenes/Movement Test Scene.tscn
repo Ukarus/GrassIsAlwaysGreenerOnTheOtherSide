@@ -15,4 +15,6 @@ script = ExtResource( 3 )
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 170, 258 )
 
-[node name="AttackUI" parent="." instance=ExtResource( 2 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AttackUI" parent="CanvasLayer" instance=ExtResource( 2 )]

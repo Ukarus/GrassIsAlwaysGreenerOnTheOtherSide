@@ -1,7 +1,7 @@
 extends Node
 
 
-onready var attack_ui = $AttackUI
+onready var attack_ui = $CanvasLayer/AttackUI
 onready var character = $Character
 
 # Called when the node enters the scene tree for the first time.
