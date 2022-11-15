@@ -13,6 +13,11 @@ func add_house(house):
 	new_house.current_beauty_points = house.current_beauty_points
 	houses.append(new_house)
 	
+func get_new_beauty_points(points):
+	if current_house == null:
+		return 0
+	return current_house.current_beauty_points - points
+	
 func update_current_house_points(new_points: int):
 	if current_house == null:
 		return
@@ -25,4 +30,3 @@ func set_current_house(house_name: String):
 	for h in houses:
 		if h.name == house_name:
 			current_house = h
-			break

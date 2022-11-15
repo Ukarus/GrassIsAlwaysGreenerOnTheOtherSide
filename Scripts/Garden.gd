@@ -6,6 +6,7 @@ onready var house_label = $CanvasLayer/GardenAttackUI/HouseContainer/Label
 onready var house_bar = $CanvasLayer/GardenAttackUI/HouseContainer/CenterContainer/HouseBar
 onready var interactive_objects = $InteractiveObjects
 onready var character = $Character
+onready var item_ui = $CanvasLayer/CurrentItemUI
 
 func _ready():
 	# TODO: Fix this thing
@@ -17,10 +18,13 @@ func _ready():
 		
 	for o in interactive_objects.get_children():
 		o.connect("object_destroyed", self, "update_house_points")
-#		house_bar.max_value = current_house.max_beauty_points
+	var inventory = PlayerGlobalData.inventory
+	character.add_items_to_inventory(inventory)
+	character.equip_item("Axe")
+	item_ui.texture = character.item_equipped.texture
 	
 func update_house_points(points: int):
-	var new_points = Neighbourgood.current_house.current_beauty_points - points
+	var new_points = Neighbourgood.get_new_beauty_points(points)
 	house_bar.value = new_points
 	Neighbourgood.update_current_house_points(new_points)
 # Called every frame. 'delta' is the elapsed time since the previous frame.

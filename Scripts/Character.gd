@@ -25,6 +25,8 @@ var hitbox_dir = {
 	"left": Vector2(-20, 10),
 }
 var objects = []
+var inventory = []
+var item_equipped
 
 onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
@@ -37,6 +39,15 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	state_machine.start("idle_down")
 	move_hitbox("down")
+	
+func add_items_to_inventory(items: Array):
+	for i in items:
+		inventory.append(i.instance())
+		
+func equip_item(item_name: String):
+	for i in inventory:
+		if i.item_name == item_name:
+			item_equipped = i
 
 func stop_movement():
 	can_move = false
@@ -65,8 +76,9 @@ func _physics_process(_delta):
 		move_to_direction("right")
 		move_hitbox("right")
 	elif Input.is_action_just_pressed("use_object"):
+		print(item_equipped)
 		for obj in objects:
-			obj.damage()
+			obj.damage(item_equipped)
 	else:
 		state_machine.travel(directions[dir])
 		

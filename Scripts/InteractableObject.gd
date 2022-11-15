@@ -2,6 +2,7 @@ extends StaticBody2D
 
 export (int) var points = 3
 export (int) var resistance = 1
+export (String) var object_name = "interactive_object"
 var is_destroyed : bool = false
 
 
@@ -12,8 +13,8 @@ func destroy_object():
 	emit_signal("object_destroyed", points)
 	$AnimationPlayer.play("die")
 
-func damage():
-	if !is_destroyed:
+func damage(item):
+	if !is_destroyed and item.can_interact_with_object(object_name):
 		resistance -= 1
 		$AnimationPlayer.play("dmg")
 		if resistance <= 0:

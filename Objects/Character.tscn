@@ -422,5 +422,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Items" type="Node2D" parent="."]
+
 [connection signal="body_entered" from="HitBoxArea" to="." method="_on_HitBoxArea_body_entered"]
 [connection signal="body_exited" from="HitBoxArea" to="." method="_on_HitBoxArea_body_exited"]

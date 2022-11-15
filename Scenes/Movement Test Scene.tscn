@@ -12,6 +12,11 @@ script = ExtResource( 3 )
 
 [node name="House1" parent="Houses" instance=ExtResource( 4 )]
 
+[node name="House2" parent="Houses" instance=ExtResource( 4 )]
+position = Vector2( 170, 407 )
+ownerName = "David"
+houseName = "David's house"
+
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 170, 258 )
 
