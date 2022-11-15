@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/PlayerItem.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Items/rock_32px.png" type="Texture" id=2]
 
 [node name="Rock" instance=ExtResource( 1 )]
-frame = 3
+texture = ExtResource( 2 )
 item_name = "rock"
 objects_to_interact = [ "window" ]

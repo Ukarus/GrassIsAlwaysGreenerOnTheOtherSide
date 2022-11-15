@@ -27,10 +27,12 @@ var hitbox_dir = {
 var objects = []
 var inventory = []
 var item_equipped
+var current_item_index = 0
 
 onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
 
+signal changed_item_equipped
 # TODO: Current attacks (vandalic actions) on a list
 # TODO: pass info of current attacks to attackUI
 
@@ -45,9 +47,10 @@ func add_items_to_inventory(items: Array):
 		inventory.append(i.instance())
 		
 func equip_item(item_name: String):
-	for i in inventory:
-		if i.item_name == item_name:
-			item_equipped = i
+	for i in range(inventory.size()):
+		if inventory[i].item_name == item_name:
+			item_equipped = inventory[i]
+			current_item_index = i
 
 func stop_movement():
 	can_move = false
@@ -76,9 +79,27 @@ func _physics_process(_delta):
 		move_to_direction("right")
 		move_hitbox("right")
 	elif Input.is_action_just_pressed("use_object"):
-		print(item_equipped)
+		# TODO: CHeck if there's an item equipped
 		for obj in objects:
 			obj.damage(item_equipped)
+	elif Input.is_action_just_pressed("next_item"):
+		if current_item_index + 1 > inventory.size() - 1:
+			current_item_index = 0
+		else:
+			current_item_index += 1
+			
+		var new_item = inventory[current_item_index]
+		item_equipped = new_item
+		emit_signal("changed_item_equipped", new_item.texture)
+	elif Input.is_action_just_pressed("previous_item"):
+		if current_item_index - 1 < 0:
+			current_item_index = inventory.size() - 1
+		else:
+			current_item_index -= 1
+			
+		var new_item = inventory[current_item_index]
+		item_equipped = new_item
+		emit_signal("changed_item_equipped", new_item.texture)
 	else:
 		state_machine.travel(directions[dir])
 		

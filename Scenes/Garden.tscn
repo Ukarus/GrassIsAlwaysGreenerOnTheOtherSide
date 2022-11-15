@@ -638,14 +638,6 @@ margin_top = -2.0
 margin_right = 2.0
 margin_bottom = -2.0
 
-[node name="CurrentItemUI" type="TextureRect" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -20.0
-margin_top = 96.0
-margin_right = 20.0
-margin_bottom = 136.0
-
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
 [node name="GardenObject" parent="InteractiveObjects" instance=ExtResource( 3 )]
