@@ -13,7 +13,7 @@ var options = [
 ]
 onready var item_list = $VSplitContainer/ItemList
 onready var house_label = $VSplitContainer/Label
-onready var house_bar = $VSplitContainer/PopularityContainer/PopularityBar
+onready var house_bar = $VSplitContainer/PopularityBar
 enum SUBMENUS {OPTIONS, ATTACK, STATS}
 var active_submenu = SUBMENUS.OPTIONS
 
