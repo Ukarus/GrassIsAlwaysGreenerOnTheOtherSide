@@ -1,24 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AttackUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Neighborhood.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/House.tscn" type="PackedScene" id=4]
 
 [node name="Movement test" type="Node"]
 script = ExtResource( 3 )
 
 [node name="Houses" type="Node2D" parent="."]
 
-[node name="House1" parent="Houses" instance=ExtResource( 4 )]
-
-[node name="House2" parent="Houses" instance=ExtResource( 4 )]
-position = Vector2( 170, 407 )
-ownerName = "David"
-houseName = "David's house"
-
 [node name="Character" parent="." instance=ExtResource( 1 )]
-position = Vector2( 170, 258 )
+position = Vector2( 202, 70 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

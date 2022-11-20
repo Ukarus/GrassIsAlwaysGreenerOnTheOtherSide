@@ -127,5 +127,5 @@ func set_camera_limits(left: float,
 func _on_HitBoxArea_body_entered(body):
 	objects.append(body)
 
-func _on_HitBoxArea_body_exited(body):
+func _on_HitBoxArea_body_exited(_body):
 	objects.pop_back()

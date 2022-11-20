@@ -137,3 +137,6 @@ color = Color( 0.921569, 0.772549, 0.101961, 0 )
 
 [node name="FCTManager" parent="." instance=ExtResource( 3 )]
 duration = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
