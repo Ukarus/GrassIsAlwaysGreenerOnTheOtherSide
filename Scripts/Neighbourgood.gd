@@ -18,6 +18,7 @@ class HouseClass:
 	# the local position in the neighbourhood scene
 	var local_position = Vector2.ZERO
 	var house_objects = []
+	var is_player_house = false
 	
 	func update_house_points(new_points: int):
 		 current_beauty_points = new_points
@@ -33,12 +34,20 @@ var houses_data = [
 	{
 		"owner_name": "John",
 		"house_name": "John's House",
-		"position": Vector2(497, 170)
+		"position": Vector2(497, 170),
+		"is_player_house": false
 	},
 	{
 		"owner_name": "David",
 		"house_name": "David's House",
-		"position": Vector2(100, 250)
+		"position": Vector2(100, 250),
+		"is_player_house": false
+	},
+	{
+		"owner_name": "Player",
+		"house_name": "Player's House",
+		"position": Vector2(940, 38),
+		"is_player_house": true
 	},
 ]
 
@@ -50,6 +59,7 @@ func _ready():
 		new_house.owner_name = houses_data[i]["owner_name"]
 		new_house.current_beauty_points = randi() % 60 + 25
 		new_house.local_position = houses_data[i]["position"]
+		new_house.is_player_house = houses_data[i]["is_player_house"]
 		load_house_objects(new_house)
 		houses.append(new_house)
 		
@@ -73,13 +83,13 @@ func get_new_beauty_points(points):
 		return 0
 	return current_house.current_beauty_points - points
 	
-func update_current_house_points(new_points: int):
-	if current_house == null:
-		return
-	for h in houses:
-		if h.houseName == current_house.houseName:
-			h.current_beauty_points = new_points
-	current_house.current_beauty_points = new_points
+#func update_current_house_points(new_points: int):
+#	if current_house == null:
+#		return
+#	for h in houses:
+#		if h.houseName == current_house.houseName:
+#			h.current_beauty_points = new_points
+#	current_house.current_beauty_points = new_points
 	
 func set_current_house(house_name: String):
 	for h in houses:

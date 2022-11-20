@@ -83,6 +83,8 @@ func _physics_process(_delta):
 		for obj in objects:
 			obj.damage(item_equipped)
 	elif Input.is_action_just_pressed("next_item"):
+		if inventory.size() == 0:
+			return
 		if current_item_index + 1 > inventory.size() - 1:
 			current_item_index = 0
 		else:
@@ -92,6 +94,8 @@ func _physics_process(_delta):
 		item_equipped = new_item
 		emit_signal("changed_item_equipped", new_item.texture)
 	elif Input.is_action_just_pressed("previous_item"):
+		if inventory.size() == 0:
+			return
 		if current_item_index - 1 < 0:
 			current_item_index = inventory.size() - 1
 		else:
