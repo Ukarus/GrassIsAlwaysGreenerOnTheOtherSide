@@ -4,7 +4,7 @@ enum ObjectState {NORMAL, DESTROYED}
 export (int) var garden_timer = 30
 export (int) var min_objects = 4
 export (int) var max_objects = 10
-var gnome = preload("res://Scenes/GardenGnome.tscn")
+var gnome = preload("res://Scenes/Objects/GardenGnome.tscn")
 
 var x_left = 96
 var x_right = 923

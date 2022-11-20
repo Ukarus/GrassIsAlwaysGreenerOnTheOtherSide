@@ -31,7 +31,9 @@ func go_back_to_map():
 	character.allow_movement()
 
 func _on_HouseDetectRadius_body_entered(house):
+	print(house.houseName)
 	Neighbourgood.set_current_house(house.houseName)
+	print(Neighbourgood.current_house.is_player_house)
 	character.stop_movement()
 	character.go_to_idle()
 	attack_ui.set_house_label()

@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/house.png" type="Texture" id=6]
 [ext_resource path="res://Assets/fences_32px.png" type="Texture" id=7]
 [ext_resource path="res://Assets/fence.png" type="Texture" id=8]
-[ext_resource path="res://Scenes/window.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Objects/window.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grass_auto"

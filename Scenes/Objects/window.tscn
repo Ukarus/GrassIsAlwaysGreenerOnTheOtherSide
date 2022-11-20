@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Images/grass.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/FCTManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InteractableObject.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/FCTManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Images/ventana.simple.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 30.5 )
+extents = Vector2( 62, 30 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -108,20 +108,19 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 0.937255, 0.92549, 0.117647, 0.454902 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Grass" type="StaticBody2D"]
+[node name="Window" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource( 2 )
-points = 4
-object_name = "grass"
+points = 9
+object_name = "window"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1, -12.5 )
-scale = Vector2( 1.02083, 0.869792 )
-texture = ExtResource( 1 )
+position = Vector2( 1, -11 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -0.5 )
+position = Vector2( 1, -1 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -130,11 +129,14 @@ anims/die = SubResource( 3 )
 anims/dmg = SubResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -32.0
+margin_left = -59.0
 margin_top = -32.0
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 61.0
+margin_bottom = 37.0
 color = Color( 0.921569, 0.772549, 0.101961, 0 )
 
-[node name="FCTManager" parent="." instance=ExtResource( 3 )]
+[node name="FCTManager" parent="." instance=ExtResource( 1 )]
 duration = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false

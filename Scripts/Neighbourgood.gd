@@ -1,9 +1,6 @@
 extends Node
 
 enum ObjectState {NORMAL, DESTROYED}
-const gnome = preload("res://Scenes/GardenGnome.tscn")
-const window = preload("res://Scenes/window.tscn")
-const grass = preload("res://Scenes/grass.tscn")
 
 class HouseObject:
 	var object_name = ""
@@ -30,9 +27,20 @@ class HouseClass:
 		owner_anger += anger
 		owner_anger = clamp(owner_anger,0,100)
 
-var objects = [
-	window,
-	grass
+const OBJECTS_DEF = [
+	{
+		"name": "garden_gnome",
+		"scene": preload("res://Scenes/Objects/GardenGnome.tscn")
+	},
+	{
+		"name": "grass",
+		"scene": preload("res://Scenes/Objects/grass.tscn")
+	},
+	{
+		"name": "window",
+		"scene": preload("res://Scenes/Objects/window.tscn")
+	},
+	
 ]
 var houses : Array = []
 var current_house : HouseClass = null
@@ -71,6 +79,7 @@ func _ready():
 		new_house.owner_name = houses_data[i]["owner_name"]
 		new_house.owner_anger = houses_data[i]["owner_anger"]
 		new_house.owner_power = houses_data[i]["owner_power"]
+		# randomly set's the starting beauty points between 25 and 85
 		new_house.current_beauty_points = randi() % 60 + 25
 		new_house.local_position = houses_data[i]["position"]
 		new_house.is_player_house = houses_data[i]["is_player_house"]
@@ -78,11 +87,14 @@ func _ready():
 		houses.append(new_house)
 		
 func load_house_objects(house: HouseClass):
-	for i in range(2):
+	var n = 2 + randi() % 6
+	# TODO: Have rules so windows are not instanced more than two times
+	for i in range(n):
+		var object = OBJECTS_DEF[ (1 + randi() % OBJECTS_DEF.size()) - 1]
 		var no = HouseObject.new()
 		no.instance_id = no.get_instance_id()
-		no.object_name = "garden_gnome"
-		no.scene = gnome
+		no.object_name = object["name"]
+		no.scene = object["scene"]
 		no.object_state = ObjectState.NORMAL
 		house.house_objects.append(no)
 
@@ -114,6 +126,7 @@ func set_current_house(house_name: String):
 	for h in houses:
 		if h.houseName == house_name:
 			current_house = h
+			break
 
 func update_current_house_item_state(obj):
 	if current_house == null:
