@@ -41,6 +41,9 @@ func load_options_for_player_house():
 		item_list.clear()
 		for o in player_options:
 			item_list.add_item(o)
+	else:
+		item_list.clear()
+		add_options()
 		
 
 func add_options():
@@ -59,7 +62,6 @@ func _input(event):
 		elif active_submenu == SUBMENUS.OPTIONS:
 			emit_signal("flee_from_fight")
 			
-# TODO: Check for amount of attacks that can be done
 func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
 	
