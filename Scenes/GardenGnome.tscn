@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Images/gnomer.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/InteractableObject.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/FCTManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Items/rock_32px.png" type="Texture" id=4]
+[ext_resource path="res://Images/Gnome/Brokengnome.png" type="Texture" id=4]
+[ext_resource path="res://Images/Gnome/gnomer.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.5, 30.5 )
@@ -62,58 +63,10 @@ tracks/4/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ "death" ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("AnimatedSprite:frame")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "die"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "death" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
 
 [sub_resource type="Animation" id=4]
 resource_name = "dmg"
@@ -131,22 +84,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 0.937255, 0.92549, 0.117647, 0.454902 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 40, 64 )
-
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 6 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "death",
+"name": "broken",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 7 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "normal",
 "speed": 5.0
@@ -184,5 +129,5 @@ color = Color( 0.921569, 0.772549, 0.101961, 0 )
 duration = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 8 )
-animation = "death"
+frames = SubResource( 5 )
+animation = "normal"
