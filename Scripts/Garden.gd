@@ -1,9 +1,10 @@
 extends Node
 
+enum ObjectState {NORMAL, DESTROYED}
 export (int) var garden_timer = 30
 export (int) var min_objects = 4
 export (int) var max_objects = 10
-var gnome = preload("res://Scenes/GardenGnome.tscn")
+var gnome = preload("res://Scenes/Objects/GardenGnome.tscn")
 
 var x_left = 96
 var x_right = 923
@@ -11,11 +12,18 @@ var y_up = 96
 var y_down = 475
 var y_mid = 322
 
+var objects = []
+
+# Night Filter Colors  - Morning         - Afternoon       - Night
+var filter_color = [Color("#ffffff"),Color("#f0dcc8"),Color("#82828c")]
 
 onready var grass_tilemap = $Grass
 onready var timer_label = $CanvasLayer/GardenAttackUI/TimerContainer/CountdownLabel
 onready var house_label = $CanvasLayer/GardenAttackUI/HouseContainer/Label
 onready var house_bar = $CanvasLayer/GardenAttackUI/HouseContainer/CenterContainer/HouseBar
+onready var day_label = $CanvasLayer/GardenAttackUI/TimeDateContainer/DayLabel
+onready var daytime_label = $CanvasLayer/GardenAttackUI/TimeDateContainer/DayTimeLabel
+onready var night_filter = $NightFilter
 onready var interactive_objects = $InteractiveObjects
 onready var character = $Character
 onready var item_ui = $CanvasLayer/GardenAttackUI/ItemRectangle/ItemTexture
@@ -26,9 +34,11 @@ func _ready():
 	var current_house = Neighbourgood.current_house
 	if current_house != null:
 		house_bar.value = current_house.current_beauty_points
-		house_label.text = current_house.name
+		house_label.text = current_house.houseName
+		objects = current_house.house_objects
 	paint_random_grass()
-	randomize_items()	
+	load_house_objects()
+#	randomize_items()	
 	# Add inventory to player
 	character.add_items_to_inventory(PlayerGlobalData.inventory)
 	character.equip_item("Axe")
@@ -38,6 +48,26 @@ func _ready():
 	for o in interactive_objects.get_children():
 		o.connect("object_destroyed", self, "update_house_points")
 	
+	# Update daytime labels and filter
+	day_label.text = "Days Left: %d" % TimeTracker.get_days_to_contest()
+	daytime_label.text = TimeTracker.get_current_time()
+	night_filter.color = filter_color[TimeTracker.current_time]
+	
+func load_house_objects():
+	for o in objects:
+		var pos = Vector2(x_left + randi() % (x_right - x_left), y_up + randi() % (y_down - y_up))
+		if pos.y < y_mid:
+			var dir = "left" if randf() < 0.5 else "right"
+			if dir == "left":
+				pos.x = 71 + randi() % (173 - 71)
+			else:
+				pos.x = 847 + randi() % (948 - 847)
+		var new_object = o.scene.instance()
+		new_object.object_id = o.instance_id
+		new_object.position = pos
+		if o.object_state == ObjectState.DESTROYED:
+			new_object.load_destroyed()
+		interactive_objects.add_child(new_object)
 
 func randomize_items():
 	var n_objects = min_objects + randi() % (max_objects - min_objects)
@@ -59,14 +89,19 @@ func paint_random_grass():
 		var pos = Vector2(randi() % 27 + 2, randi() % 17 + 2)
 		grass_tilemap.set_cell(pos.x, pos.y, 1)
 
-func update_house_points(points: int):
-	var new_points = Neighbourgood.get_new_beauty_points(points)
+#func update_house_points(points: int):
+func update_house_points(obj):
+	var new_points = Neighbourgood.get_new_beauty_points(obj.points)
 	house_bar.value = new_points
-	Neighbourgood.update_current_house_points(new_points)
+	Neighbourgood.current_house.update_house_points(new_points)
+	Neighbourgood.update_current_house_item_state(obj)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if garden_timer == 0:
+		TimeTracker.end_turn()
 		get_tree().change_scene("res://Scenes/Movement Test Scene.tscn")
+		
 	timer_label.text = "{t}".format({"t": garden_timer})
 	
 	if Input.is_action_just_pressed("ui_select"):

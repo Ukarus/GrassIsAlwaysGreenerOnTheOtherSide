@@ -9,13 +9,10 @@ var spray = preload("res://Scenes/Items/spray.tscn")
 var player_neighbour_pos = Vector2(170, 258)
 
 # Array 
-var inventory = []
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	inventory.append(axe)
-	inventory.append(rock)
-	inventory.append(flamethrower)
-	inventory.append(eggs)
-	inventory.append(spray)
+var inventory = [
+	axe,
+	rock,
+	flamethrower,
+	eggs,
+	spray
+]
