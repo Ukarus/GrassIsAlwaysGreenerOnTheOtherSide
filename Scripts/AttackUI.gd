@@ -21,7 +21,7 @@ signal flee_from_fight
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	add_options()
+	load_options()
 	set_focus_on_attacks()
 	
 	
@@ -35,9 +35,10 @@ func set_focus_on_attacks():
 	item_list.grab_focus()
 	item_list.select(0)
 
-func load_options_for_player_house():
+func load_options():
 	var current_house = Neighbourgood.current_house
-	if current_house.is_player_house:
+	
+	if current_house != null and current_house.is_player_house:
 		item_list.clear()
 		for o in player_options:
 			item_list.add_item(o)
@@ -56,8 +57,7 @@ func _input(event):
 		if active_submenu == SUBMENUS.ATTACK or active_submenu == SUBMENUS.STATS:
 			active_submenu = SUBMENUS.OPTIONS
 			item_list.clear()
-			add_options()
-			load_options_for_player_house()
+			load_options()
 			set_focus_on_attacks()
 		elif active_submenu == SUBMENUS.OPTIONS:
 			emit_signal("flee_from_fight")

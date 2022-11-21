@@ -39,3 +39,5 @@ func damage(item):
 			is_destroyed = true
 			destroy_object()
 		
+func repair():
+	current_state = ObjectState.NORMAL
