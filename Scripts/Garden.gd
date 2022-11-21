@@ -14,11 +14,16 @@ var y_mid = 322
 
 var objects = []
 
+# Night Filter Colors  - Morning         - Afternoon       - Night
+var filter_color = [Color("#ffffff"),Color("#f0dcc8"),Color("#82828c")]
 
 onready var grass_tilemap = $Grass
 onready var timer_label = $CanvasLayer/GardenAttackUI/TimerContainer/CountdownLabel
 onready var house_label = $CanvasLayer/GardenAttackUI/HouseContainer/Label
 onready var house_bar = $CanvasLayer/GardenAttackUI/HouseContainer/CenterContainer/HouseBar
+onready var day_label = $CanvasLayer/GardenAttackUI/TimeDateContainer/DayLabel
+onready var daytime_label = $CanvasLayer/GardenAttackUI/TimeDateContainer/DayTimeLabel
+onready var night_filter = $NightFilter
 onready var interactive_objects = $InteractiveObjects
 onready var character = $Character
 onready var item_ui = $CanvasLayer/GardenAttackUI/ItemRectangle/ItemTexture
@@ -42,6 +47,11 @@ func _ready():
 	# Connect signals of the interactive objects
 	for o in interactive_objects.get_children():
 		o.connect("object_destroyed", self, "update_house_points")
+	
+	# Update daytime labels and filter
+	day_label.text = "Days Left: %d" % TimeTracker.get_days_to_contest()
+	daytime_label.text = TimeTracker.get_current_time()
+	night_filter.color = filter_color[TimeTracker.current_time]
 	
 func load_house_objects():
 	for o in objects:
@@ -89,7 +99,9 @@ func update_house_points(obj):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if garden_timer == 0:
+		TimeTracker.end_turn()
 		get_tree().change_scene("res://Scenes/Movement Test Scene.tscn")
+		
 	timer_label.text = "{t}".format({"t": garden_timer})
 	
 	if Input.is_action_just_pressed("ui_select"):

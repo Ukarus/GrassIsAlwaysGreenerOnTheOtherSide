@@ -11,15 +11,21 @@ class HouseObject:
 class HouseClass:
 	var houseName = ""
 	var owner_name = ""
+	var owner_anger = 0
+	var owner_power = 5
 	var current_beauty_points = 0
 	# the local position in the neighbourhood scene
 	var local_position = Vector2.ZERO
 	var house_objects = []
 	var is_player_house = false
 	
+	
 	func update_house_points(new_points: int):
 		 current_beauty_points = new_points
-
+	
+	func update_anger(anger: int):
+		owner_anger += anger
+		owner_anger = clamp(owner_anger,0,100)
 
 const OBJECTS_DEF = [
 	{
@@ -42,18 +48,24 @@ var houses_data = [
 	{
 		"owner_name": "John",
 		"house_name": "John's House",
+		"owner_anger": 0,
+		"owner_power": 15,
 		"position": Vector2(497, 170),
 		"is_player_house": false
 	},
 	{
 		"owner_name": "David",
 		"house_name": "David's House",
+		"owner_anger": 75,
+		"owner_power": 7,
 		"position": Vector2(100, 250),
 		"is_player_house": false
 	},
 	{
 		"owner_name": "Player",
 		"house_name": "Player's House",
+		"owner_power": 0,
+		"owner_anger": 0,
 		"position": Vector2(940, 38),
 		"is_player_house": true
 	},
@@ -65,6 +77,8 @@ func _ready():
 		var new_house = HouseClass.new()
 		new_house.houseName = houses_data[i]["house_name"]
 		new_house.owner_name = houses_data[i]["owner_name"]
+		new_house.owner_anger = houses_data[i]["owner_anger"]
+		new_house.owner_power = houses_data[i]["owner_power"]
 		# randomly set's the starting beauty points between 25 and 85
 		new_house.current_beauty_points = randi() % 60 + 25
 		new_house.local_position = houses_data[i]["position"]
@@ -102,6 +116,11 @@ func get_new_beauty_points(points):
 #		if h.houseName == current_house.houseName:
 #			h.current_beauty_points = new_points
 #	current_house.current_beauty_points = new_points
+
+func get_player_house():
+	for h in houses:
+		if h.is_player_house:
+			return h
 	
 func set_current_house(house_name: String):
 	for h in houses:
