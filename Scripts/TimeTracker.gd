@@ -71,9 +71,12 @@ func next_day():
 			rng.randomize()
 			var rand = rng.randi_range(0,100)
 			if rand > rng_attack_threshold:
-				#Attack
-				objective.current_beauty_points -= house.owner_power
-				print(house.owner_name + " has attacked " + objective.owner_name +"'s house for "+ str(house.owner_power)+ " damage.")
+				#Attack random object
+				var target_object = objective.house_objects[rng.randi() % objective.house_objects.size() ]
+				target_object.destroy()
+				objective.update_house_points(0)
+				#objective.current_beauty_points -= house.owner_power
+				print(house.owner_name + " has attacked " + objective.owner_name +"'s house and destroyed one "+ target_object.object_name)
 	# Restore beauty points
 	#for house in Neighbourgood.houses:
 	#	if house.is_player_house:
