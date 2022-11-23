@@ -36,7 +36,7 @@ func _ready():
 		house_bar.value = current_house.current_beauty_points
 		house_label.text = current_house.houseName
 		objects = current_house.house_objects
-	paint_random_grass()
+	#paint_random_grass()
 	load_house_objects()
 #	randomize_items()	
 	# Add inventory to player
@@ -44,6 +44,9 @@ func _ready():
 	character.equip_item("Axe")
 	character.connect("changed_item_equipped", self, "set_item_texture")
 	set_item_texture(character.item_equipped.texture)
+	# DEBUG: list objects
+	for o in objects:
+		print(o.object_name + ": " + ObjectState.keys()[o.object_state])
 	# Connect signals of the interactive objects
 	for o in interactive_objects.get_children():
 		o.connect("object_destroyed", self, "update_house_points")
@@ -53,6 +56,19 @@ func _ready():
 	daytime_label.text = TimeTracker.get_current_time()
 	night_filter.color = filter_color[TimeTracker.current_time]
 	
+# Kick player from house when catched:
+func kick_player():
+	# Add neighbor anger
+	Neighbourgood.current_house.owner_anger += randi()%5+1
+	# Finish turn
+	finish_turn()
+
+func finish_turn():
+	# Add anger to neighbour
+	Neighbourgood.current_house.owner_anger += randi()%5+1
+	TimeTracker.end_turn()
+	get_tree().change_scene("res://Scenes/Movement Test Scene.tscn")
+
 func load_house_objects():
 	for o in objects:
 		var pos = Vector2(x_left + randi() % (x_right - x_left), y_up + randi() % (y_down - y_up))
@@ -99,8 +115,7 @@ func update_house_points(obj):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if garden_timer == 0:
-		TimeTracker.end_turn()
-		get_tree().change_scene("res://Scenes/Movement Test Scene.tscn")
+		finish_turn()
 		
 	timer_label.text = "{t}".format({"t": garden_timer})
 	

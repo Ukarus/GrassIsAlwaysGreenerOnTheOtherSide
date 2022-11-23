@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export(int) var walk_speed = 45
-export(int) var run_speed = 100
+export(int) var walk_speed = 50
+export(int) var run_speed = 120
 export(bool) var running = false
 
 export(bool) var _debug = true
@@ -13,6 +13,8 @@ var patrol_path: Array = []  # Path to objective
 var patrol_nodes: Array = [] # Patrolling nodes
 var patrol_node = 0
 var patrol_mode = true
+var player = null
+var catch_distance = 33
 
 var directions = ["idle_down","idle_up","idle_left","idle_right"]
 var dir = 0
@@ -35,15 +37,22 @@ func _ready():
 
 func _physics_process(_delta):
 	debug_line.global_position = Vector2.ZERO
-	if patrol_nodes:
+	if patrol_nodes and patrol_mode:
 		navigate()
-	pass
+	if not patrol_mode and player:
+		follow_player()
+		if global_position.distance_to(player.global_position) <= catch_distance:
+			# Kick player
+			get_tree().get_current_scene().kick_player()
+	pass 
 
 func _get_path():
-	if patrol_nodes:
+	if patrol_nodes and patrol_mode:
 		var next_node = patrol_nodes[patrol_node]
 		navigation_agent.set_target_location(next_node.global_position)
-		
+	if not patrol_mode and player:
+		navigation_agent.set_target_location(player.global_position)
+	
 	pass
 
 func navigate():
@@ -53,18 +62,29 @@ func navigate():
 			patrol_node = 0
 		_get_path()
 		return
-	
 	_direction = global_position.direction_to(navigation_agent.get_next_location())
 	if running:
 		_velocity = move_and_slide(_direction * run_speed)
 	else:
 		_velocity = move_and_slide(_direction * walk_speed)
-	
 	if _debug:
 		debug_line.points = navigation_agent.get_nav_path()
 	selec_anim()
-	
 	pass
+	
+func follow_player():
+	if navigation_agent.is_navigation_finished():
+		# refresh
+		_get_path()
+		return
+	_direction = global_position.direction_to(navigation_agent.get_next_location())
+	if running:
+		_velocity = move_and_slide(_direction * run_speed)
+	else:
+		_velocity = move_and_slide(_direction * walk_speed)
+	if _debug:
+		debug_line.points = navigation_agent.get_nav_path()
+	selec_anim()
 
 func selec_anim():
 	var mov_dir = _direction.normalized()
@@ -93,3 +113,11 @@ func selec_anim():
 				animation_player.play("run_up")
 			else:
 				animation_player.play("walk_up")
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Player"):
+		patrol_mode = false
+		player = body
+		running = true
+	pass # Replace with function body.

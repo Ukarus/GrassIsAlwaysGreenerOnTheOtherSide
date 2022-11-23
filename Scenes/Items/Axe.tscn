@@ -4,4 +4,4 @@
 
 [node name="Axe" instance=ExtResource( 1 )]
 item_name = "Axe"
-objects_to_interact = [ "garden_gnome" ]
+objects_to_interact = [ "garden_gnome", "window" ]

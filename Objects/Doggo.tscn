@@ -856,6 +856,7 @@ tracks/4/keys = {
 
 [node name="Doggo" type="KinematicBody2D"]
 script = ExtResource( 2 )
+_debug = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 radius = 20.0
@@ -904,3 +905,5 @@ autostart = true
 [node name="Line2D" type="Line2D" parent="."]
 width = 5.0
 default_color = Color( 0.4, 0.501961, 1, 0.556863 )
+
+[connection signal="body_entered" from="Detection/Area2D" to="." method="_on_Area2D_body_entered"]

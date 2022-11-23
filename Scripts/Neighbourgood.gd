@@ -4,9 +4,13 @@ enum ObjectState {NORMAL, DESTROYED}
 
 class HouseObject:
 	var object_name = ""
+	var points
 	var scene
 	var object_state = ObjectState.NORMAL
 	var instance_id = 0
+	
+	func destroy():
+		object_state = ObjectState.DESTROYED
 
 class HouseClass:
 	var houseName = ""
@@ -19,9 +23,15 @@ class HouseClass:
 	var house_objects = []
 	var is_player_house = false
 	
+	func get_beauty_points():
+		var sum = 0
+		for o in house_objects:
+			if o.object_state == ObjectState.NORMAL:
+				sum += o.points
+		return sum
 	
 	func update_house_points(new_points: int):
-		 current_beauty_points = new_points
+		 current_beauty_points = get_beauty_points()
 	
 	func update_anger(anger: int):
 		owner_anger += anger
@@ -30,15 +40,13 @@ class HouseClass:
 const OBJECTS_DEF = [
 	{
 		"name": "garden_gnome",
-		"scene": preload("res://Scenes/Objects/GardenGnome.tscn")
+		"scene": preload("res://Scenes/Objects/GardenGnome.tscn"),
+		"points": 2
 	},
 	{
 		"name": "grass",
-		"scene": preload("res://Scenes/Objects/grass.tscn")
-	},
-	{
-		"name": "window",
-		"scene": preload("res://Scenes/Objects/window.tscn")
+		"scene": preload("res://Scenes/Objects/grass.tscn"),
+		"points": 4
 	},
 	
 ]
@@ -90,11 +98,12 @@ func load_house_objects(house: HouseClass):
 	var n = 2 + randi() % 6
 	# TODO: Have rules so windows are not instanced more than two times
 	for i in range(n):
-		var object = OBJECTS_DEF[ (1 + randi() % OBJECTS_DEF.size()) - 1]
+		var object = OBJECTS_DEF[ (randi() % OBJECTS_DEF.size()) - 1]
 		var no = HouseObject.new()
 		no.instance_id = no.get_instance_id()
 		no.object_name = object["name"]
 		no.scene = object["scene"]
+		no.points = object["points"]
 		no.object_state = ObjectState.NORMAL
 		house.house_objects.append(no)
 

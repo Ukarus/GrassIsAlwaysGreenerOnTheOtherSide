@@ -10,6 +10,10 @@ export(float) var rot_speed = 0.5
 export(bool) var fixed_angle = false
 export(float) var angle = 0.0
 
+var player_catched = false
+var player = null
+var color_catched = Color("80ff9696")
+
 onready var area: Area2D = $Area2D
 
 var _pos_rot = true
@@ -27,6 +31,10 @@ func _ready():
 func _process(delta):
 	if fixed_angle:
 		return
+	if player:
+		area.look_at(player.global_position)
+		area.rotate(deg2rad(-90))
+		return
 	if _pos_rot:
 		area.rotation = lerp_angle(area.rotation, deg2rad(max_rotation), rot_speed * delta)
 		if abs(area.rotation_degrees - max_rotation) <= bias:
@@ -36,3 +44,14 @@ func _process(delta):
 		if abs(area.rotation_degrees - min_rotation) <= bias:
 			_pos_rot = true
 	pass
+
+
+func _on_Area2D_body_entered(body):
+	# Add anger to neighbour once
+	if body.is_in_group("Player") and not player_catched:
+		# Add anger
+		randomize()
+		Neighbourgood.current_house.owner_anger += randi()%5+1
+		player = body
+		$Area2D/Polygon2D.color = color_catched
+	pass # Replace with function body.

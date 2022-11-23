@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Objects/FCTManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InteractableObject.gd" type="Script" id=2]
-[ext_resource path="res://Images/ventana.simple.png" type="Texture" id=3]
+[ext_resource path="res://Images/Window/BrokenWindow3.png" type="Texture" id=4]
+[ext_resource path="res://Images/Window/BrokenWindow4.png" type="Texture" id=5]
+[ext_resource path="res://Images/Window/BrokenWindow1.png" type="Texture" id=6]
+[ext_resource path="res://Images/Window/ventana.simple.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 62, 30 )
+extents = Vector2( 59.25, 39 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -108,19 +111,45 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 0.937255, 0.92549, 0.117647, 0.454902 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Window" type="StaticBody2D"]
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "broken1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "broken2",
+"speed": 5.0
+}, {
+"frames": [ null ],
+"loop": true,
+"name": "broken3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "broken4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "normal",
+"speed": 5.0
+} ]
+
+[node name="window" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource( 2 )
-points = 9
+points = 5
+resistance = 5
 object_name = "window"
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1, -11 )
-texture = ExtResource( 3 )
+multiple_hits = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -1 )
+position = Vector2( -0.25, 1 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -129,14 +158,16 @@ anims/die = SubResource( 3 )
 anims/dmg = SubResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -59.0
-margin_top = -32.0
-margin_right = 61.0
-margin_bottom = 37.0
+margin_left = -16.0
+margin_top = -39.0
+margin_right = 16.0
+margin_bottom = 8.0
 color = Color( 0.921569, 0.772549, 0.101961, 0 )
 
 [node name="FCTManager" parent="." instance=ExtResource( 1 )]
 duration = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
+position = Vector2( 0, -15 )
+frames = SubResource( 5 )
+animation = "broken4"
