@@ -44,18 +44,26 @@ func _ready():
 	character.equip_item("Axe")
 	character.connect("changed_item_equipped", self, "set_item_texture")
 	set_item_texture(character.item_equipped.texture)
+	
+	for i in character.inventory:
+		i.connect("item_depleted", self, "set_item_depleted")
 	# DEBUG: list objects
 	for o in objects:
 		print(o.object_name + ": " + ObjectState.keys()[o.object_state])
 	# Connect signals of the interactive objects
 	for o in interactive_objects.get_children():
-		o.connect("object_destroyed", self, "update_house_points")
-	
-	# Update daytime labels and filter
+		o.connect("object_destroyed", self, "update_house_points")	
+	update_time_ui()
+
+func set_item_depleted(item_name: String):
+	character.set_item_depleted(item_name)
+
+# Update daytime labels and filter
+func update_time_ui():
 	day_label.text = "Days Left: %d" % TimeTracker.get_days_to_contest()
 	daytime_label.text = TimeTracker.get_current_time()
 	night_filter.color = filter_color[TimeTracker.current_time]
-	
+
 # Kick player from house when catched:
 func kick_player():
 	# Add neighbor anger

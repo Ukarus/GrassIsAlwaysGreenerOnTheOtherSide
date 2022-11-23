@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Objects/FCTManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/InteractableObject.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Images/Window/BrokenWindow4.png" type="Texture" id=5]
 [ext_resource path="res://Images/Window/BrokenWindow1.png" type="Texture" id=6]
 [ext_resource path="res://Images/Window/ventana.simple.png" type="Texture" id=7]
+[ext_resource path="res://Images/Window/BrokenWindow2.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 59.25, 39 )
@@ -111,6 +112,11 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 0.937255, 0.92549, 0.117647, 0.454902 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 128, 128 )
+
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 5 ) ],
@@ -123,7 +129,7 @@ animations = [ {
 "name": "broken2",
 "speed": 5.0
 }, {
-"frames": [ null ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "broken3",
 "speed": 5.0

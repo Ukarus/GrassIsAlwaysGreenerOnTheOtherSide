@@ -33,8 +33,6 @@ onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
 
 signal changed_item_equipped
-# TODO: Current attacks (vandalic actions) on a list
-# TODO: pass info of current attacks to attackUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -79,31 +77,14 @@ func _physics_process(_delta):
 		move_to_direction("right")
 		move_hitbox("right")
 	elif Input.is_action_just_pressed("use_object"):
-		# TODO: CHeck if there's an item equipped
+		if item_equipped == null:
+			return
 		for obj in objects:
 			obj.damage(item_equipped)
 	elif Input.is_action_just_pressed("next_item"):
-		if inventory.size() == 0:
-			return
-		if current_item_index + 1 > inventory.size() - 1:
-			current_item_index = 0
-		else:
-			current_item_index += 1
-			
-		var new_item = inventory[current_item_index]
-		item_equipped = new_item
-		emit_signal("changed_item_equipped", new_item.texture)
+		equip_next_item()
 	elif Input.is_action_just_pressed("previous_item"):
-		if inventory.size() == 0:
-			return
-		if current_item_index - 1 < 0:
-			current_item_index = inventory.size() - 1
-		else:
-			current_item_index -= 1
-			
-		var new_item = inventory[current_item_index]
-		item_equipped = new_item
-		emit_signal("changed_item_equipped", new_item.texture)
+		equip_previous_item()
 	else:
 		state_machine.travel(directions[dir])
 		
@@ -127,6 +108,37 @@ func set_camera_limits(left: float,
 	camera.limit_right = right
 	camera.limit_top = up
 	camera.limit_bottom = down
+	
+func equip_next_item():
+	if inventory.size() == 0:
+			return
+	if current_item_index - 1 < 0:
+		current_item_index = inventory.size() - 1
+	else:
+		current_item_index -= 1
+		
+	var new_item = inventory[current_item_index]
+	item_equipped = new_item
+	emit_signal("changed_item_equipped", new_item.texture)
+	
+func equip_previous_item():
+	if inventory.size() == 0:
+		return
+	if current_item_index + 1 > inventory.size() - 1:
+		current_item_index = 0
+	else:
+		current_item_index += 1
+		
+	var new_item = inventory[current_item_index]
+	item_equipped = new_item
+	emit_signal("changed_item_equipped", new_item.texture)
+
+func set_item_depleted(item_name: String):
+	PlayerGlobalData.remove_item_from_inventory(item_equipped.item_name)
+	var prev_item_index = current_item_index
+	equip_next_item()
+	inventory.pop_at(prev_item_index)
+	
 
 func _on_HitBoxArea_body_entered(body):
 	objects.append(body)

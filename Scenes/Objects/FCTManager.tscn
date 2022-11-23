@@ -3,4 +3,5 @@
 [ext_resource path="res://Scripts/FCTManager.gd" type="Script" id=1]
 
 [node name="FCTManager" type="Node2D"]
+z_index = 2
 script = ExtResource( 1 )

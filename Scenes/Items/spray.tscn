@@ -7,3 +7,6 @@
 texture = ExtResource( 2 )
 item_name = "spray"
 objects_to_interact = [ "wall" ]
+has_durability = true
+durability = 3
+max_durability = 3

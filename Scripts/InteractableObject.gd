@@ -5,8 +5,8 @@ export (int) var points = 3
 export (int) var resistance = 1
 export (String) var object_name = "interactive_object"
 export (bool) var multiple_hits = false
-enum ObjectState {NORMAL, DESTROYED}
 
+enum ObjectState {NORMAL, DESTROYED}
 onready var animated_sprite = $AnimatedSprite
 onready var animation_player = $AnimationPlayer
 var current_state = ObjectState.NORMAL
@@ -24,10 +24,10 @@ func load_destroyed():
 	is_destroyed = true
 	$AnimationPlayer.play("die")
 
-func damage_object(resistance):
-	$FCTManager.show_value(points)
+func damage_object(res):
+	# $FCTManager.show_value(points)
 #	emit_signal("object_destroyed", points)
-	$AnimatedSprite.play("broken"+String(resistance))
+	$AnimatedSprite.play("broken"+String(res))
 
 func destroy_object():
 	if !multiple_hits:
@@ -40,21 +40,14 @@ func destroy_object():
 
 func damage(item):
 	if !is_destroyed and item.can_interact_with_object(object_name):
-		if !multiple_hits:
-			resistance -= 1
-			$AnimationPlayer.play("dmg")
-			if resistance <= 0:
-				current_state = ObjectState.DESTROYED
-				is_destroyed = true
-				destroy_object()
-		else:
-			resistance -= 1
-			print(resistance)
+		resistance -= 1
+		if multiple_hits:
 			damage_object(resistance)
-			$AnimationPlayer.play("dmg")
-			if resistance <= 1:
-				current_state = ObjectState.DESTROYED
-				is_destroyed = true
-				destroy_object()
-			
+		if item.has_durability:
+			item.reduce_durability()
+		$AnimationPlayer.play("dmg")
+		if resistance <= 0 or (multiple_hits and resistance <= 1):
+			current_state = ObjectState.DESTROYED
+			is_destroyed = true
+			destroy_object()
 
