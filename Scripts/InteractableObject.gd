@@ -25,18 +25,18 @@ func load_destroyed():
 	$AnimationPlayer.play("die")
 
 func damage_object(res):
-	# $FCTManager.show_value(points)
+# $FCTManager.show_value(points)
 #	emit_signal("object_destroyed", points)
 	$AnimatedSprite.play("broken"+String(res))
 
 func destroy_object():
 	if !multiple_hits:
-		$FCTManager.show_value(points)
-		emit_signal("object_destroyed", self)
 		$AnimatedSprite.play("broken")
 	else:
 		$AnimatedSprite.play("broken1")
-	
+	$FCTManager.show_value(points)
+	emit_signal("object_destroyed", self)
+
 
 func damage(item):
 	if !is_destroyed and item.can_interact_with_object(object_name):

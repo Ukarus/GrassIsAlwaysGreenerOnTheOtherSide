@@ -119,18 +119,19 @@ func update_house_points(obj):
 	house_bar.value = new_points
 	Neighbourgood.current_house.update_house_points(new_points)
 	Neighbourgood.update_current_house_item_state(obj)
+	PlayerGlobalData.add_vandal_currency(obj.points)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if garden_timer == 0:
 		finish_turn()
 		
 	timer_label.text = "{t}".format({"t": garden_timer})
-	
-	if Input.is_action_just_pressed("ui_select"):
-		for i in interactive_objects.get_children():
-			i.queue_free()
-		randomize_items()
+		
+#	if Input.is_action_just_pressed("ui_select"):
+#		for i in interactive_objects.get_children():
+#			i.queue_free()
+#		randomize_items()
 
 func set_camera_limits():
 	var map_limits = $Grass.get_used_rect()

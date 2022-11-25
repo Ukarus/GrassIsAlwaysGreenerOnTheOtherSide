@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AttackUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Neighborhood.gd" type="Script" id=3]
+[ext_resource path="res://Theme/default_theme.tres" type="Theme" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://Theme/shop_list_font.tres" type="DynamicFont" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31, 31.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 53.5, 54 )
 
 [node name="Movement test" type="Node"]
 script = ExtResource( 3 )
@@ -15,3 +24,52 @@ position = Vector2( 170, 258 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AttackUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+
+[node name="VandalCurrencyLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -440.0
+margin_top = 32.0
+margin_right = -29.0
+margin_bottom = 64.0
+theme = ExtResource( 4 )
+text = "Vandal Currency:  $10"
+
+[node name="ShopList" type="ItemList" parent="CanvasLayer"]
+margin_left = 192.0
+margin_top = 40.0
+margin_right = 390.0
+margin_bottom = 319.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+
+[node name="Shop" type="StaticBody2D" parent="."]
+position = Vector2( 69, 49 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="Sprite" type="Sprite" parent="Shop"]
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 1 )
+
+[node name="ShopArea" type="Area2D" parent="Shop"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop/ShopArea"]
+position = Vector2( 2.5, 2 )
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="Shop"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -43.0
+margin_top = -59.0
+margin_right = 49.0
+margin_bottom = -27.0
+theme = ExtResource( 4 )
+text = "SHOP"
+
+[connection signal="item_activated" from="CanvasLayer/ShopList" to="." method="_on_ShopList_item_activated"]
+[connection signal="body_entered" from="Shop/ShopArea" to="." method="_on_ShopArea_body_entered"]

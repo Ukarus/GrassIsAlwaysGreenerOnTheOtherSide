@@ -52,6 +52,8 @@ const OBJECTS_DEF = [
 ]
 var houses : Array = []
 var current_house : HouseClass = null
+# Store a reference for the player house
+var player_house : HouseClass = null
 var houses_data = [
 	{
 		"owner_name": "John",
@@ -66,7 +68,7 @@ var houses_data = [
 		"house_name": "David's House",
 		"owner_anger": 75,
 		"owner_power": 7,
-		"position": Vector2(100, 250),
+		"position": Vector2(45, 250),
 		"is_player_house": false
 	},
 	{
@@ -92,12 +94,14 @@ func _ready():
 		new_house.local_position = houses_data[i]["position"]
 		new_house.is_player_house = houses_data[i]["is_player_house"]
 		load_house_objects(new_house)
+		if new_house.is_player_house:
+			player_house = new_house
 		houses.append(new_house)
 		
 func load_house_objects(house: HouseClass):
 	var n = 2 + randi() % 6
 	# TODO: Have rules so windows are not instanced more than two times
-	for i in range(n):
+	for _i in range(n):
 		var object = OBJECTS_DEF[ (randi() % OBJECTS_DEF.size()) - 1]
 		var no = HouseObject.new()
 		no.instance_id = no.get_instance_id()
