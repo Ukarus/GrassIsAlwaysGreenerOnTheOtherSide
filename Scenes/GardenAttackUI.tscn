@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Theme/default_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Items/axe_32px.png" type="Texture" id=3]
 [ext_resource path="res://Theme/small_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scenes/UI/TimeDateContainer.tscn" type="PackedScene" id=5]
 
 [node name="GardenAttackUI" type="Control"]
 anchor_right = 1.0
@@ -92,22 +93,4 @@ margin_bottom = 48.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="TimeDateContainer" type="VSplitContainer" parent="."]
-margin_left = 69.0
-margin_top = 42.0
-margin_right = 323.0
-margin_bottom = 118.0
-rect_scale = Vector2( 0.8, 0.8 )
-
-[node name="DayLabel" type="Label" parent="TimeDateContainer"]
-margin_right = 254.0
-margin_bottom = 32.0
-theme = ExtResource( 1 )
-text = "Days Left: 30"
-
-[node name="DayTimeLabel" type="Label" parent="TimeDateContainer"]
-margin_top = 44.0
-margin_right = 254.0
-margin_bottom = 76.0
-theme = ExtResource( 1 )
-text = "MORNING"
+[node name="TimeDateContainer" parent="." instance=ExtResource( 5 )]

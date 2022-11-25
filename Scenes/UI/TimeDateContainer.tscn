@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
+
+[node name="TimeDateContainer" type="VSplitContainer"]
+margin_left = 69.0
+margin_top = 42.0
+margin_right = 323.0
+margin_bottom = 118.0
+rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="DayLabel" type="Label" parent="."]
+margin_right = 254.0
+margin_bottom = 32.0
+theme = ExtResource( 1 )
+text = "Days Left: 30"
+
+[node name="DayTimeLabel" type="Label" parent="."]
+margin_top = 44.0
+margin_right = 254.0
+margin_bottom = 76.0
+theme = ExtResource( 1 )
+text = "MORNING"

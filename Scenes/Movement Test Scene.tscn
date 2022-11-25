@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AttackUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Neighborhood.gd" type="Script" id=3]
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://Theme/shop_list_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Theme/small_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scenes/UI/TimeDateContainer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Theme/shop_list_font.tres" type="DynamicFont" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31.5 )
@@ -24,6 +26,7 @@ position = Vector2( 170, 258 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="AttackUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+visible = false
 
 [node name="VandalCurrencyLabel" type="Label" parent="CanvasLayer"]
 anchor_left = 1.0
@@ -36,10 +39,35 @@ theme = ExtResource( 4 )
 text = "Vandal Currency:  $10"
 
 [node name="ShopList" type="ItemList" parent="CanvasLayer"]
+visible = false
 margin_left = 192.0
 margin_top = 40.0
 margin_right = 390.0
 margin_bottom = 319.0
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 8 )
+
+[node name="TimeDateContainer" parent="CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="MenuContainer" type="VSplitContainer" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -30.0
+margin_top = -310.0
+margin_right = 132.0
+
+[node name="MenuLabel" type="Label" parent="CanvasLayer/MenuContainer"]
+margin_right = 194.0
+margin_bottom = 32.0
+theme = ExtResource( 4 )
+text = "Inventory"
+
+[node name="PlayerItemsList" type="ItemList" parent="CanvasLayer/MenuContainer"]
+margin_top = 44.0
+margin_right = 194.0
+margin_bottom = 310.0
 theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 6 )
 
@@ -72,4 +100,5 @@ theme = ExtResource( 4 )
 text = "SHOP"
 
 [connection signal="item_activated" from="CanvasLayer/ShopList" to="." method="_on_ShopList_item_activated"]
+[connection signal="item_activated" from="CanvasLayer/MenuContainer/PlayerItemsList" to="." method="_on_PlayerItemsList_item_activated"]
 [connection signal="body_entered" from="Shop/ShopArea" to="." method="_on_ShopArea_body_entered"]

@@ -38,7 +38,7 @@ func _ready():
 		objects = current_house.house_objects
 	#paint_random_grass()
 	load_house_objects()
-#	randomize_items()	
+	# randomize_items()	
 	# Add inventory to player
 	character.add_items_to_inventory(PlayerGlobalData.inventory)
 	character.equip_item("Axe")
@@ -115,10 +115,12 @@ func paint_random_grass():
 
 #func update_house_points(points: int):
 func update_house_points(obj):
+	print('updating house points')
 	var new_points = Neighbourgood.get_new_beauty_points(obj.points)
+#	print(new_points)
 	house_bar.value = new_points
-	Neighbourgood.current_house.update_house_points(new_points)
 	Neighbourgood.update_current_house_item_state(obj)
+	Neighbourgood.current_house.update_house_points(new_points)
 	PlayerGlobalData.add_vandal_currency(obj.points)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

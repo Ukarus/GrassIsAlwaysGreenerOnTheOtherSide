@@ -90,6 +90,7 @@ func _ready():
 		new_house.owner_anger = houses_data[i]["owner_anger"]
 		new_house.owner_power = houses_data[i]["owner_power"]
 		# randomly set's the starting beauty points between 25 and 85
+		# TODO: Replace this with the sum of all of the beauty points for the objects the house has
 		new_house.current_beauty_points = randi() % 60 + 25
 		new_house.local_position = houses_data[i]["position"]
 		new_house.is_player_house = houses_data[i]["is_player_house"]

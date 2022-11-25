@@ -646,6 +646,18 @@ margin_bottom = -2.0
 
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
+[node name="door" parent="InteractiveObjects" instance=ExtResource( 11 )]
+position = Vector2( 500, 277 )
+
+[node name="wall" parent="InteractiveObjects" instance=ExtResource( 12 )]
+position = Vector2( 596, 247 )
+
+[node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
+position = Vector2( 356, 231 )
+
+[node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
+position = Vector2( 724, 231 )
+
 [node name="MapLimits" type="Node2D" parent="."]
 
 [node name="LeftLimit" type="StaticBody2D" parent="MapLimits"]
@@ -668,12 +680,6 @@ rotation = 1.57079
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapLimits/LeftLimit3"]
 position = Vector2( -3.99957, 110.5 )
 shape = SubResource( 55 )
-
-[node name="door" parent="." instance=ExtResource( 11 )]
-position = Vector2( 500, 277 )
-
-[node name="wall" parent="." instance=ExtResource( 12 )]
-position = Vector2( 596, 247 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 cell_size = 2.0
@@ -699,11 +705,5 @@ position = Vector2( 915, 199 )
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
 position = Vector2( 217, 186 )
-
-[node name="window" parent="." instance=ExtResource( 10 )]
-position = Vector2( 356, 231 )
-
-[node name="window2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 724, 231 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
