@@ -66,7 +66,8 @@ func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
 	
 	if option == "Attack":
-		get_tree().change_scene_to(garden_scene)
+		print(Neighbourgood.current_house.garden_scene.resource_name)
+		get_tree().change_scene_to(Neighbourgood.current_house.garden_scene)
 	elif option == "Back":
 		emit_signal("flee_from_fight")
 	elif option == "Stats":

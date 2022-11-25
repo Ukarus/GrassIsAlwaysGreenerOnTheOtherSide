@@ -14,15 +14,16 @@ func _ready():
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
 	character.position = PlayerGlobalData.player_neighbour_pos
 	var houses = Neighbourgood.houses
-	
-	for h in houses:
-		var new_house = houseNode.instance()
-		new_house.load_data(h)
-		houses_node.add_child(new_house)
-		new_house.position = h.local_position
-		new_house.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")
+	Neighbourgood.load_houses($Houses.get_children())
+
+	for h in houses_node.get_children():
+#		var new_house = houseNode.instance()
+#		new_house.load_data(h)
+#		houses_node.add_child(new_house)
+#		new_house.position = h.local_position
+		h.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")
 		
-	
+
 func _process(_delta):
 	PlayerGlobalData.player_neighbour_pos = character.position
 

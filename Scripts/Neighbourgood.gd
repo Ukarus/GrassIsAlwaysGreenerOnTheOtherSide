@@ -22,6 +22,7 @@ class HouseClass:
 	var local_position = Vector2.ZERO
 	var house_objects = []
 	var is_player_house = false
+	var garden_scene : PackedScene
 	
 	func get_beauty_points():
 		var sum = 0
@@ -81,19 +82,36 @@ var houses_data = [
 
 func _ready():
 	randomize()
-	for i in range(houses_data.size()):
+#	for i in range(houses_data.size()):
+#		var new_house = HouseClass.new()
+#		new_house.houseName = houses_data[i]["house_name"]
+#		new_house.owner_name = houses_data[i]["owner_name"]
+#		new_house.owner_anger = houses_data[i]["owner_anger"]
+#		new_house.owner_power = houses_data[i]["owner_power"]
+#		# randomly set's the starting beauty points between 25 and 85
+#		new_house.current_beauty_points = randi() % 60 + 25
+#		new_house.local_position = houses_data[i]["position"]
+#		new_house.is_player_house = houses_data[i]["is_player_house"]
+#		load_house_objects(new_house)
+#		houses.append(new_house)
+#
+
+func load_houses(jaus):
+	for h in jaus:
 		var new_house = HouseClass.new()
-		new_house.houseName = houses_data[i]["house_name"]
-		new_house.owner_name = houses_data[i]["owner_name"]
-		new_house.owner_anger = houses_data[i]["owner_anger"]
-		new_house.owner_power = houses_data[i]["owner_power"]
+		new_house.houseName = h.houseName
+		new_house.owner_name = h.ownerName
+		new_house.owner_anger = 0
+		new_house.owner_power = 0
 		# randomly set's the starting beauty points between 25 and 85
-		new_house.current_beauty_points = randi() % 60 + 25
-		new_house.local_position = houses_data[i]["position"]
-		new_house.is_player_house = houses_data[i]["is_player_house"]
+		new_house.current_beauty_points = h.current_beauty_points
+		new_house.local_position = h.position
+		new_house.is_player_house = h.is_player_house
+		print(h.garden_scene)
+		new_house.garden_scene = h.garden_scene
 		load_house_objects(new_house)
 		houses.append(new_house)
-		
+
 func load_house_objects(house: HouseClass):
 	var n = 2 + randi() % 6
 	# TODO: Have rules so windows are not instanced more than two times
