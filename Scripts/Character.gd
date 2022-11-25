@@ -42,7 +42,7 @@ func _ready():
 	
 func add_items_to_inventory(items: Array):
 	for i in items:
-		inventory.append(i.instance())
+		inventory.append(i.scene.instance())
 		
 func equip_item(item_name: String):
 	for i in range(inventory.size()):

@@ -5,6 +5,7 @@ export (Array, String) var objects_to_interact
 export (bool) var has_durability = false
 export (int) var durability = 5
 export (int) var max_durability = 5
+export (int) var price = 5
 
 signal item_depleted
 

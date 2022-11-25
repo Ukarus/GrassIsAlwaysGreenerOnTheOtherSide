@@ -514,6 +514,18 @@ margin_bottom = -2.0
 
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
+[node name="door" parent="InteractiveObjects" instance=ExtResource( 11 )]
+position = Vector2( 500, 277 )
+
+[node name="wall" parent="InteractiveObjects" instance=ExtResource( 12 )]
+position = Vector2( 596, 247 )
+
+[node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
+position = Vector2( 356, 231 )
+
+[node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
+position = Vector2( 724, 231 )
+
 [node name="MapLimits" type="Node2D" parent="."]
 
 [node name="LeftLimit" type="StaticBody2D" parent="MapLimits"]
