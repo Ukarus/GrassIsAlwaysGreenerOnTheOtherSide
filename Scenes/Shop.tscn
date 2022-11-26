@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Shop.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31.5 )
@@ -13,6 +14,7 @@ extents = Vector2( 53.5, 54 )
 position = Vector2( 69, 49 )
 collision_layer = 2
 collision_mask = 4
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -36,3 +38,5 @@ margin_right = 49.0
 margin_bottom = -27.0
 theme = ExtResource( 1 )
 text = "SHOP"
+
+[connection signal="body_entered" from="ShopArea" to="." method="_on_ShopArea_body_entered"]

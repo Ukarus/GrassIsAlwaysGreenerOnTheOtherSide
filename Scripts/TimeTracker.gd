@@ -11,6 +11,9 @@ var current_time = day_time.MORNING
 
 var min_anger_attack = 25
 var rng_attack_threshold = 50
+var attacks_alerts = []
+
+signal neighbour_attacked_player
 	
 func _init():
 	#debug 
@@ -32,10 +35,13 @@ func end_turn():
 		else:
 			current_time = day_time.MORNING
 	else:
+		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
+#			simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
+#			simulate_attacks_to_player()
 	print(get_current_time())
 	
 	
@@ -44,22 +50,12 @@ func next_day():
 	current_day += 1
 	var attacks_today = 0
 	var max_attacks_day = 2
+	# TODO: Check if player house != null
 	var player_house = Neighbourgood.get_player_house()
+	var attacks_alerts = []
 	# Attacks to player
 	print("houses: "+str(Neighbourgood.houses.size()))
-	for house in Neighbourgood.houses:
-		# Exit if player house
-		if house.is_player_house:
-			continue
-		rng.randomize()
-		var anger_threshold = rng.randi_range(min_anger_attack,100)
-		# Check attack threshold
-		if house.owner_anger >= anger_threshold  && attacks_today < max_attacks_day:
-			# Attack player
-			player_house.current_beauty_points -= house.owner_power
-			house.update_anger(-25)
-			attacks_today += 1
-			print(house.owner_name + " has attacked your house for "+ str(house.owner_power) + " damage.")
+	simulate_attacks_to_player()
 	# Attacks between neighbours
 	for house in Neighbourgood.houses:
 		rng.randomize()
@@ -82,10 +78,34 @@ func next_day():
 	#	if house.is_player_house:
 	#		continue
 	#	house.increase_beauty_points(house.restore_power)
-	
-	pass
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func reset_attack_alerts():
+	attacks_alerts = []
 
+func simulate_attacks_to_player():
+	var attacks_today = 0
+	var max_attacks_day = 2
+	# TODO: Check if player house != null
+	var player_house = Neighbourgood.get_player_house()
+	# Attacks to player
+	print("houses: "+str(Neighbourgood.houses.size()))
+	for house in Neighbourgood.houses:
+		# Exit if player house
+		if house.is_player_house:
+			continue
+		rng.randomize()
+		var anger_threshold = rng.randi_range(min_anger_attack,100)
+		# Check attack threshold
+		if house.owner_anger >= anger_threshold  && attacks_today < max_attacks_day:
+			# Attack player
+			player_house.current_beauty_points -= house.owner_power
+			house.update_anger(-25)
+			attacks_today += 1
+			attacks_alerts.append({
+				"neighbour_name": house.owner_name,
+				"dmg": str(house.owner_power)
+			})
+			print(house.owner_name + " has attacked your house for "+ str(house.owner_power) + " damage.")
+#	if attacks_alerts.size() > 0:
+#		print('attacking player')
+#		emit_signal("neighbour_attacked_player")

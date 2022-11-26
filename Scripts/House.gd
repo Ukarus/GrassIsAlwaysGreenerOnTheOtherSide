@@ -3,8 +3,10 @@ extends StaticBody2D
 export (int) var max_beauty_points = 100
 export (String) var ownerName = "John"
 export (String) var houseName = "House1"
+export (PackedScene) var garden_scene 
+
 var current_beauty_points : int = 30
-var is_player_house : bool = false
+export (bool) var is_player_house = false
 # List of the current objects the house has
 var objects = []
 

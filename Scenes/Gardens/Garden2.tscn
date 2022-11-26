@@ -481,7 +481,7 @@ vertices = PoolVector2Array( 70, 489, 75, 71, 181, 73, 185, 300, 956, 488, 843, 
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 5, 6, 7, 4 ), PoolIntArray( 5, 3, 3 ) ]
 outlines = [ PoolVector2Array( 843, 68, 954, 68, 956, 488, 70, 489, 75, 71, 181, 73, 185, 300, 185, 300, 843, 301 ) ]
 
-[node name="Garden" type="Node"]
+[node name="Garden2" type="Node"]
 script = ExtResource( 4 )
 garden_timer = 15
 
@@ -515,16 +515,19 @@ margin_bottom = -2.0
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
 [node name="door" parent="InteractiveObjects" instance=ExtResource( 11 )]
-position = Vector2( 500, 277 )
+position = Vector2( 504, 272 )
 
 [node name="wall" parent="InteractiveObjects" instance=ExtResource( 12 )]
-position = Vector2( 596, 247 )
+position = Vector2( 568, 248 )
 
 [node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 356, 231 )
+position = Vector2( 344, 240 )
 
 [node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 724, 231 )
+position = Vector2( 664, 240 )
+
+[node name="window3" parent="InteractiveObjects" instance=ExtResource( 10 )]
+position = Vector2( 604, 162 )
 
 [node name="MapLimits" type="Node2D" parent="."]
 
@@ -548,12 +551,6 @@ rotation = 1.57079
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapLimits/LeftLimit3"]
 position = Vector2( -3.99957, 110.5 )
 shape = SubResource( 55 )
-
-[node name="door" parent="." instance=ExtResource( 11 )]
-position = Vector2( 504, 272 )
-
-[node name="wall" parent="." instance=ExtResource( 12 )]
-position = Vector2( 568, 248 )
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 cell_size = 2.0
@@ -579,11 +576,5 @@ position = Vector2( 915, 199 )
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
 position = Vector2( 217, 186 )
-
-[node name="window" parent="." instance=ExtResource( 10 )]
-position = Vector2( 344, 240 )
-
-[node name="window2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 664, 240 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

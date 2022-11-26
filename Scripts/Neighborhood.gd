@@ -11,6 +11,7 @@ onready var daytime_label = $CanvasLayer/TimeDateContainer/DayTimeLabel
 onready var shop_items = PlayerGlobalData.shop_items
 onready var inventory_menu = $CanvasLayer/MenuContainer/PlayerItemsList
 onready var menu_container = $CanvasLayer/MenuContainer
+onready var popup_container = $CanvasLayer/AlertPanel
 const houseNode = preload("res://Scenes/House.tscn")
 enum UI_OPTIONS {ATTACK_UI, SHOP_LIST, MENU, NONE}
 var current_ui = UI_OPTIONS.NONE
@@ -19,26 +20,26 @@ var current_ui = UI_OPTIONS.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	popup_container.hide()
 	shop_list.hide()
 	attack_ui.hide()
 	menu_container.hide()
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
 	character.position = PlayerGlobalData.player_neighbour_pos
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
-	var houses = Neighbourgood.houses
-	
-	for h in houses:
-		var new_house = houseNode.instance()
-		new_house.load_data(h)
-		houses_node.add_child(new_house)
-		new_house.position = h.local_position
-		new_house.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")
+	Neighbourgood.load_houses($Houses.get_children())
+
+	for h in houses_node.get_children():
+		h.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")	
 	
 	for i in shop_items:
 		shop_list.add_item("{name} x1 ${price}".format({"name": i.item_name, "price": i.price}))
 	shop_list.add_item("Back")
+	$Shop.connect("on_shopArea_entered", self, "_on_ShopArea_body_entered")
 	load_inventory_menu()
-	
+	if TimeTracker.attacks_alerts.size() > 0:
+		_on_Attack_Alert()
+			
 func load_inventory_menu():
 	inventory_menu.clear()
 	var inventory = PlayerGlobalData.inventory
@@ -58,6 +59,7 @@ func update_time_ui():
 func _process(_delta):
 	PlayerGlobalData.player_neighbour_pos = character.position
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
+	update_time_ui()
 	if (Input.is_action_just_pressed("ui_cancel") and (current_ui == UI_OPTIONS.NONE)):
 		current_ui = UI_OPTIONS.MENU
 		menu_container.show()
@@ -91,6 +93,19 @@ func _on_ShopArea_body_entered(_body):
 	shop_list.grab_focus()
 	shop_list.select(0)
 
+func _on_Attack_Alert():
+	var attack_data = TimeTracker.attacks_alerts
+	popup_container.show()
+	popup_container.get_node("OkButton").grab_focus()
+	var alert_string = ""
+	for alert in attack_data:
+		alert_string += "{on} has attacked your house for {op} damage\n".format({
+		"on": alert["neighbour_name"],
+		"op": alert["dmg"]
+	})
+	popup_container.get_node("AlertLabel").text = alert_string
+	TimeTracker.reset_attack_alerts()
+
 func _on_ShopList_item_activated(index):
 	var option = shop_list.get_item_text(index)
 	if option == "Back":
@@ -110,4 +125,10 @@ func _on_PlayerItemsList_item_activated(index):
 		menu_container.hide()
 		character.allow_movement()
 		current_ui = UI_OPTIONS.NONE
-	
+
+func _on_Button_button_up():
+	popup_container.hide()
+
+
+func _on_OkButton_button_up():
+	popup_container.hide()
