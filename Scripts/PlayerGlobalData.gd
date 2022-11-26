@@ -36,6 +36,7 @@ var default_inventory = [
 
 var shop_items = []
 var inventory = []
+var last_house_attacked
 
 func _ready():
 	vandal_currency = 10 + randi() % 40

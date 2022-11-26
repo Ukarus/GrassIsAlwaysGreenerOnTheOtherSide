@@ -27,7 +27,8 @@ func _ready():
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
 	character.position = PlayerGlobalData.player_neighbour_pos
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
-	Neighbourgood.load_houses($Houses.get_children())
+	if Neighbourgood.houses.size() == 0:
+		Neighbourgood.load_houses($Houses.get_children())
 
 	for h in houses_node.get_children():
 		h.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")	
@@ -83,7 +84,6 @@ func _on_HouseDetectRadius_body_entered(house):
 	attack_ui.load_options()
 	attack_ui.show()
 	attack_ui.set_focus_on_attacks()
-
 
 func _on_ShopArea_body_entered(_body):
 	current_ui = UI_OPTIONS.SHOP_LIST

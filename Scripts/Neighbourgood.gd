@@ -110,12 +110,22 @@ func load_houses(jaus):
 		new_house.local_position = h.position
 		new_house.is_player_house = h.is_player_house
 		new_house.garden_scene = h.garden_scene
-		load_house_objects(new_house)
+		var o = []
+		for ob in h.objects:
+			var house_object = HouseObject.new()
+			house_object.object_name = ob.object_name
+			house_object.points = ob.points
+			# house_object.scene = ob.scene
+			house_object.object_state = ob.current_state
+			house_object.instance_id = house_object.get_instance_id()
+			o.append(house_object)
+		new_house.house_objects = o
+		# load_house_objects(new_house)
 		if new_house.is_player_house:
 			player_house = new_house
 		houses.append(new_house)
 
-func load_house_objects(house: HouseClass):
+func load_house_objects(house):
 	var n = 2 + randi() % 6
 	# TODO: Have rules so windows are not instanced more than two times
 	for _i in range(n):
@@ -127,6 +137,18 @@ func load_house_objects(house: HouseClass):
 		no.points = object["points"]
 		no.object_state = ObjectState.NORMAL
 		house.house_objects.append(no)
+#func load_house_objects(house: HouseClass):
+#	var n = 2 + randi() % 6
+#	TODO: Have rules so windows are not instanced more than two times
+#	for _i in range(n):
+#		var object = OBJECTS_DEF[ (randi() % OBJECTS_DEF.size()) - 1]
+#		var no = HouseObject.new()
+#		no.instance_id = no.get_instance_id()
+#		no.object_name = object["name"]
+#		no.scene = object["scene"]
+#		no.points = object["points"]
+#		no.object_state = ObjectState.NORMAL
+#		house.house_objects.append(no)
 
 func add_house(house):
 	var new_house = HouseClass.new()

@@ -38,10 +38,10 @@ func end_turn():
 		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
-#			simulate_attacks_to_player()
+			simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
-#			simulate_attacks_to_player()
+			simulate_attacks_to_player()
 	print(get_current_time())
 	
 	

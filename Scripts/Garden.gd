@@ -31,14 +31,8 @@ onready var item_ui = $CanvasLayer/GardenAttackUI/ItemRectangle/ItemTexture
 func _ready():
 	randomize()
 	set_camera_limits()
-	var current_house = Neighbourgood.current_house
-	if current_house != null:
-		house_bar.value = current_house.current_beauty_points
-		house_label.text = current_house.houseName
-		objects = current_house.house_objects
-	#paint_random_grass()
-	load_house_objects()
-	# randomize_items()	
+	load_house_ui_info()
+#	load_house_objects()
 	# Add inventory to player
 	character.add_items_to_inventory(PlayerGlobalData.inventory)
 	character.equip_item("Axe")
@@ -127,13 +121,14 @@ func update_house_points(obj):
 func _process(_delta):
 	if garden_timer == 0:
 		finish_turn()
-		
 	timer_label.text = "{t}".format({"t": garden_timer})
-		
-#	if Input.is_action_just_pressed("ui_select"):
-#		for i in interactive_objects.get_children():
-#			i.queue_free()
-#		randomize_items()
+	
+func load_house_ui_info():
+	var current_house = Neighbourgood.current_house
+	if current_house != null:
+		house_bar.value = current_house.current_beauty_points
+		house_label.text = current_house.houseName
+		objects = current_house.house_objects
 
 func set_camera_limits():
 	var map_limits = $Grass.get_used_rect()
