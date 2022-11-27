@@ -5,6 +5,8 @@ enum ObjectState {NORMAL, DESTROYED}
 class HouseObject:
 	var object_name = ""
 	var points
+	var days_to_recover
+	var days_broken = 0
 	var scene
 	var object_state = ObjectState.NORMAL
 	var instance_id = 0
@@ -42,12 +44,14 @@ const OBJECTS_DEF = [
 	{
 		"name": "garden_gnome",
 		"scene": preload("res://Scenes/Objects/GardenGnome.tscn"),
-		"points": 2
+		"points": 2,
+		"days_to_recover": 2
 	},
 	{
 		"name": "grass",
 		"scene": preload("res://Scenes/Objects/grass.tscn"),
-		"points": 4
+		"points": 4,
+		"days_to_recover": 6
 	},
 	
 ]
@@ -115,6 +119,7 @@ func load_houses(jaus):
 			var house_object = HouseObject.new()
 			house_object.object_name = ob.object_name
 			house_object.points = ob.points
+			house_object.days_to_recover = ob.days_to_recover
 			# house_object.scene = ob.scene
 			house_object.object_state = ob.current_state
 			house_object.instance_id = house_object.get_instance_id()
@@ -135,6 +140,7 @@ func load_house_objects(house):
 		no.object_name = object["name"]
 		no.scene = object["scene"]
 		no.points = object["points"]
+		no.days_to_recover = object["days_to_recover"]
 		no.object_state = ObjectState.NORMAL
 		house.house_objects.append(no)
 #func load_house_objects(house: HouseClass):

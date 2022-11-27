@@ -50,6 +50,10 @@ func next_day():
 	current_day += 1
 	var attacks_today = 0
 	var max_attacks_day = 2
+	
+	# Fix broken objects in neighbours houses
+	fix_objects()
+	
 	# TODO: Check if player house != null
 	var player_house = Neighbourgood.get_player_house()
 	var attacks_alerts = []
@@ -81,6 +85,21 @@ func next_day():
 
 func reset_attack_alerts():
 	attacks_alerts = []
+
+func fix_objects():
+	for house in Neighbourgood.houses:
+		# Skip Player house
+		if house.is_player_house:
+			continue
+		else:
+			# Find broken object
+			for object in house.house_objects:
+				if object.object_state == Neighbourgood.ObjectState.DESTROYED:
+					object.days_broken += 1
+					if object.days_broken == object.days_to_recover:
+						object.object_state == Neighbourgood.ObjectState.NORMAL
+						object.days_broken = 0
+	pass
 
 func simulate_attacks_to_player():
 	var attacks_today = 0
