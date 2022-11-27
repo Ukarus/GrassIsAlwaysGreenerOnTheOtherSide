@@ -5,6 +5,10 @@ enum ObjectState {NORMAL, DESTROYED}
 class HouseObject:
 	var object_name = ""
 	var points
+	var resistance
+	var max_resistance
+	var multiple_hits = false
+	var is_destroyed
 	var days_to_recover
 	var days_broken = 0
 	var scene
@@ -115,9 +119,12 @@ func load_houses(jaus):
 		var o = []
 		for ob in h.objects:
 			var house_object = HouseObject.new()
-			house_object.object_name = ob.object_name
+			house_object.object_name = ob.name
 			house_object.points = ob.points
 			house_object.days_to_recover = ob.days_to_recover
+			house_object.resistance = ob.resistance
+			house_object.max_resistance = ob.max_resistance
+			house_object.multiple_hits = ob.multiple_hits
 			# house_object.scene = ob.scene
 			house_object.object_state = ob.current_state
 			house_object.instance_id = house_object.get_instance_id()

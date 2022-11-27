@@ -33,6 +33,7 @@ func _ready():
 	set_camera_limits()
 	load_house_ui_info()
 #	load_house_objects()
+	load_objects()
 	# Add inventory to player
 	character.add_items_to_inventory(PlayerGlobalData.inventory)
 	character.equip_item("Axe")
@@ -44,9 +45,10 @@ func _ready():
 	# DEBUG: list objects
 	for o in objects:
 		print(o.object_name + ": " + ObjectState.keys()[o.object_state])
+	
 	# Connect signals of the interactive objects
 	for o in interactive_objects.get_children():
-		o.connect("object_destroyed", self, "update_house_points")	
+		o.connect("object_destroyed", self, "update_house_points")
 	update_time_ui()
 
 func set_item_depleted(item_name: String):
@@ -70,6 +72,26 @@ func finish_turn():
 	Neighbourgood.current_house.owner_anger += randi()%5+1
 	TimeTracker.end_turn()
 	get_tree().change_scene("res://Scenes/Movement Test Scene.tscn")
+
+func load_objects():
+	for o in objects:
+		# Search objects in the scene by name
+		var obj_instance = interactive_objects.get_node(o.object_name)
+		if !o.multiple_hits:
+			if o.object_state == ObjectState.DESTROYED:
+				obj_instance.is_destroyed = true
+				obj_instance.animated_sprite.play("broken")
+		else:
+			# handle multi hits objects
+			obj_instance.resistance = o.resistance
+			if o.resistance == o.max_resistance:
+				obj_instance.animated_sprite.play("normal")
+			elif o.resistance <= 1:
+				obj_instance.animated_sprite.play("broken1")
+				obj_instance.is_destroyed = true
+			else:
+				obj_instance.animated_sprite.play("broken"+String(o.resistance))
+	pass
 
 func load_house_objects():
 	for o in objects:
@@ -116,7 +138,12 @@ func update_house_points(obj):
 	Neighbourgood.update_current_house_item_state(obj)
 	Neighbourgood.current_house.update_house_points(new_points)
 	PlayerGlobalData.add_vandal_currency(obj.points)
-	
+	# Destroy object in data
+	for o in objects:
+		if o.object_name == obj.name:
+			o.object_state = ObjectState.DESTROYED
+			print(obj.name + " was destroyed")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if garden_timer == 0:

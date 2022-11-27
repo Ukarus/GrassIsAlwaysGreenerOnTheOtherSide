@@ -88,19 +88,35 @@ func reset_attack_alerts():
 
 func fix_objects():
 	for house in Neighbourgood.houses:
-		print(house.owner_name)
 		# Skip Player house
 		if house.is_player_house:
 			continue
 		else:
+			print("Fixing objects from: "+ house.owner_name)
 			# Find broken object
 			for object in house.house_objects:
 				print(object.object_name)
-				if object.object_state == Neighbourgood.ObjectState.DESTROYED:
-					object.days_broken += 1
-					if object.days_broken == object.days_to_recover:
-						object.object_state == Neighbourgood.ObjectState.NORMAL
-						object.days_broken = 0
+				
+				if !object.multiple_hits:
+					if object.object_state == Neighbourgood.ObjectState.DESTROYED:
+						object.days_broken += 1
+						if object.days_broken >= object.days_to_recover:
+							object.object_state = Neighbourgood.ObjectState.NORMAL
+							object.is_destroyed = false
+							object.days_broken = 0
+				else:
+					# For multi hit objects recover one resistance per day if not destroyed
+					if object.object_state == Neighbourgood.ObjectState.DESTROYED:
+						object.days_broken += 1
+						if object.days_broken >= object.days_to_recover:
+							object.object_state == Neighbourgood.ObjectState.NORMAL
+							object.is_destroyed = false
+							object.resistance = object.max_resistance
+							object.days_broken = 0
+					else:
+						if object.resistance < object.max_resistance:
+							object.resistance += 1
+						
 	pass
 
 func simulate_attacks_to_player():

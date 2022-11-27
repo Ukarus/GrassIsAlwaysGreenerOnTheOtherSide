@@ -3,6 +3,7 @@ extends StaticBody2D
 # beauty_points
 export (int) var points = 3
 export (int) var resistance = 1
+export (int) var max_resistance = 1
 export (int) var days_to_recover = 1
 export (String) var object_name = "interactive_object"
 export (bool) var multiple_hits = false
@@ -22,13 +23,25 @@ func _ready():
 		animated_sprite.play("normal")
 		
 func load_destroyed():
-	is_destroyed = true
-	$AnimationPlayer.play("die")
+	#$AnimationPlayer.play("die")
+	if !multiple_hits:
+		animated_sprite.play("broken")
+		is_destroyed = true
+		current_state = ObjectState.DESTROYED
+	else:
+		animated_sprite.play("broken"+String(resistance))
+		if resistance <= 0:
+			is_destroyed = true
+			current_state = ObjectState.DESTROYED
 
 func damage_object(res):
 # $FCTManager.show_value(points)
 #	emit_signal("object_destroyed", points)
 	animated_sprite.play("broken"+String(res))
+	# Update resistance in data
+	for o in Neighbourgood.current_house.house_objects:
+		if o.object_name == name:
+			o.resistance = resistance
 
 func destroy_object():
 	if !multiple_hits:

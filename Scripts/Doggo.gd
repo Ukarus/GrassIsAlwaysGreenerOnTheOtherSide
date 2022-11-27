@@ -14,7 +14,7 @@ var patrol_nodes: Array = [] # Patrolling nodes
 var patrol_node = 0
 var patrol_mode = true
 var player = null
-var catch_distance = 33
+var catch_distance = 34
 
 var directions = ["idle_down","idle_up","idle_left","idle_right"]
 var dir = 0

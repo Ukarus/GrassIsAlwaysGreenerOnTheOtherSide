@@ -151,6 +151,7 @@ collision_mask = 4
 script = ExtResource( 2 )
 points = 5
 resistance = 5
+max_resistance = 5
 object_name = "window"
 multiple_hits = true
 
