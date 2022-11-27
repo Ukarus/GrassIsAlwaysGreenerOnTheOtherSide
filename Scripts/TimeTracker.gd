@@ -38,10 +38,10 @@ func end_turn():
 		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
-			#simulate_attacks_to_player()
+			simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
-			#simulate_attacks_to_player()
+			simulate_attacks_to_player()
 	print(get_current_time())
 	
 	
@@ -117,7 +117,6 @@ func fix_objects():
 						if object.resistance < object.max_resistance:
 							object.resistance += 1
 						
-	pass
 
 func simulate_attacks_to_player():
 	var attacks_today = 0
@@ -134,6 +133,11 @@ func simulate_attacks_to_player():
 		var anger_threshold = rng.randi_range(min_anger_attack,100)
 		# Check attack threshold
 		if house.owner_anger >= anger_threshold  && attacks_today < max_attacks_day:
+			if player_house.current_beauty_points > house.owner_power:
+				player_house.destroy_all_objects()
+			else:
+				var target_object = player_house.house_objects[rng.randi() % player_house.house_objects.size() ]
+				target_object.destroy()
 			# Attack player
 			player_house.current_beauty_points -= house.owner_power
 			house.update_anger(-25)

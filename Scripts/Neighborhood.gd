@@ -28,7 +28,7 @@ func _ready():
 	character.position = PlayerGlobalData.player_neighbour_pos
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
 	if Neighbourgood.houses.size() == 0:
-		Neighbourgood.load_houses($Houses.get_children())
+		Neighbourgood.load_houses(houses_node.get_children())
 
 	for h in houses_node.get_children():
 		h.connect("on_house_entered", self, "_on_HouseDetectRadius_body_entered")	
@@ -114,7 +114,6 @@ func _on_ShopList_item_activated(index):
 		current_ui = UI_OPTIONS.NONE
 	# if we select an item to buy
 	else:
-		print(current_ui)
 		PlayerGlobalData.buy_item(PlayerGlobalData.shop_items[index].item_name, 1)
 		load_inventory_menu()
 

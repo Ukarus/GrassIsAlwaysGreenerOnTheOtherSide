@@ -1,8 +1,5 @@
 extends StaticBody2D
 
-
-
-
 signal on_shopArea_entered
 
 
