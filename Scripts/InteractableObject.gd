@@ -3,6 +3,7 @@ extends StaticBody2D
 # beauty_points
 export (int) var points = 3
 export (int) var resistance = 1
+export (int) var days_to_recover = 1
 export (String) var object_name = "interactive_object"
 export (bool) var multiple_hits = false
 

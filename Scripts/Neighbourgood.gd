@@ -44,14 +44,12 @@ const OBJECTS_DEF = [
 	{
 		"name": "garden_gnome",
 		"scene": preload("res://Scenes/Objects/GardenGnome.tscn"),
-		"points": 2,
-		"days_to_recover": 2
+		"points": 2
 	},
 	{
 		"name": "grass",
 		"scene": preload("res://Scenes/Objects/grass.tscn"),
-		"points": 4,
-		"days_to_recover": 6
+		"points": 4
 	},
 	
 ]

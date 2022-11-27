@@ -532,18 +532,23 @@ position = Vector2( 500, 277 )
 
 [node name="wall" parent="InteractiveObjects" instance=ExtResource( 12 )]
 position = Vector2( 596, 247 )
+days_to_recover = 2
 
 [node name="wall2" parent="InteractiveObjects" instance=ExtResource( 12 )]
 position = Vector2( 268, 244 )
+days_to_recover = 2
 
 [node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
 position = Vector2( 366, 227 )
+days_to_recover = 4
 
 [node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
 position = Vector2( 724, 231 )
+days_to_recover = 4
 
 [node name="Grass" parent="InteractiveObjects" instance=ExtResource( 14 )]
 position = Vector2( 400, 450 )
+days_to_recover = 3
 
 [node name="GardenGnome" parent="InteractiveObjects" instance=ExtResource( 13 )]
 position = Vector2( 627, 450 )

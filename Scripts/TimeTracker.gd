@@ -38,10 +38,10 @@ func end_turn():
 		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
-			simulate_attacks_to_player()
+			#simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
-			simulate_attacks_to_player()
+			#simulate_attacks_to_player()
 	print(get_current_time())
 	
 	
@@ -88,12 +88,14 @@ func reset_attack_alerts():
 
 func fix_objects():
 	for house in Neighbourgood.houses:
+		print(house.owner_name)
 		# Skip Player house
 		if house.is_player_house:
 			continue
 		else:
 			# Find broken object
 			for object in house.house_objects:
+				print(object.object_name)
 				if object.object_state == Neighbourgood.ObjectState.DESTROYED:
 					object.days_broken += 1
 					if object.days_broken == object.days_to_recover:
