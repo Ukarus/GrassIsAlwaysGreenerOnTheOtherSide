@@ -576,13 +576,13 @@ margin_bottom = 167.0
 theme = ExtResource( 12 )
 
 [node name="MenuLabel" type="Label" parent="CanvasLayer/MenuContainer"]
-margin_right = 194.0
-margin_bottom = 32.0
+margin_right = 186.0
+margin_bottom = 26.0
 text = "Inventory"
 
 [node name="PlayerItemsList" type="ItemList" parent="CanvasLayer/MenuContainer"]
-margin_top = 44.0
-margin_right = 194.0
+margin_top = 38.0
+margin_right = 186.0
 margin_bottom = 302.0
 custom_fonts/font = ExtResource( 11 )
 
