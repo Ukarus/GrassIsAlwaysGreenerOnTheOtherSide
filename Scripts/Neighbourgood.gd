@@ -14,9 +14,20 @@ class HouseObject:
 	var scene
 	var object_state = ObjectState.NORMAL
 	var instance_id = 0
+	var price_to_repair = 0
 	
 	func destroy():
 		object_state = ObjectState.DESTROYED
+		# Check if this works
+		is_destroyed = true
+		resistance = 0
+		
+	func repair():
+		if object_state == ObjectState.DESTROYED:
+			object_state == ObjectState.NORMAL
+			is_destroyed = false
+			resistance = max_resistance
+			days_broken = 0
 
 class HouseClass:
 	var houseName = ""
@@ -43,6 +54,28 @@ class HouseClass:
 	func update_anger(anger: int):
 		owner_anger += anger
 		owner_anger = clamp(owner_anger,0,100)
+		
+	func repair_object(object_name: String):
+		for o in house_objects:
+			if o.object_name == object_name and o.object_status == ObjectState.DESTROYED:
+				o.object_state == ObjectState.NORMAL
+				o.is_destroyed = false
+				o.resistance = o.max_resistance
+				o.days_broken = 0
+	
+	func destroy_all_objects():
+		for o in house_objects:
+			o.destroy()	
+	
+	func destroy_random_object():
+		randomize()
+		var available_objects = []
+		for o in house_objects:
+			if o.object_status == ObjectState.NORMAL:
+				available_objects.append(o)
+		var target_object = available_objects[randi() % available_objects.size()]
+		target_object.destroy()
+		
 
 const OBJECTS_DEF = [
 	{
@@ -127,6 +160,7 @@ func load_houses(jaus):
 			house_object.multiple_hits = ob.multiple_hits
 			# house_object.scene = ob.scene
 			house_object.object_state = ob.current_state
+			house_object.price_to_repair = ob.price_to_repair
 			house_object.instance_id = house_object.get_instance_id()
 			o.append(house_object)
 		new_house.house_objects = o

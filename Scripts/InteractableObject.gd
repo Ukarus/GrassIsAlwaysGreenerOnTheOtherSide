@@ -7,6 +7,7 @@ export (int) var max_resistance = 1
 export (int) var days_to_recover = 1
 export (String) var object_name = "interactive_object"
 export (bool) var multiple_hits = false
+export (int) var price_to_repair = 5
 
 enum ObjectState {NORMAL, DESTROYED}
 onready var animated_sprite = $AnimatedSprite

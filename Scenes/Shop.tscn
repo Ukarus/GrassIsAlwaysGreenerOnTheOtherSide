@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/uipack_fixed/Font/kenvector_future.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Shop.gd" type="Script" id=3]
+[ext_resource path="res://Assets/ModernCity/ModernCityTileMap.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31, 31.5 )
+extents = Vector2( 126.5, 95.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 53.5, 54 )
+extents = Vector2( 119, 112.5 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
 
 [node name="Shop" type="StaticBody2D"]
 position = Vector2( 69, 49 )
@@ -16,27 +20,39 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="ExteriorShop" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1, 0 )
+tile_data = PoolIntArray( -196610, 21, 0, -196609, 21, 1, -262144, 21, 1, -262143, 21, 1, -262142, 21, 1, -262141, 21, 1, -262140, 21, 1, -262139, 21, 2, -131074, 21, 0, -131073, 21, 1, -196608, 21, 1, -196607, 21, 1, -196606, 21, 1, -196605, 21, 1, -196604, 21, 1, -196603, 21, 2, -65538, 18, 0, -65537, 18, 1, -131072, 18, 1, -131071, 18, 1, -131070, 18, 1, -131069, 18, 1, -131068, 18, 1, -131067, 18, 3, -2, 18, 0, -1, 18, 2, -65536, 18, 1, -65535, 18, 1, -65534, 18, 1, -65533, 18, 1, -65532, 18, 1, -65531, 18, 3, 65534, 18, 0, 65535, 18, 1, 0, 18, 1, 1, 19, 0, 2, 19, 1, 3, 18, 1, 4, 18, 1, 5, 18, 3, 131070, 18, 65536, 131071, 18, 65538, 65536, 18, 65538, 65537, 19, 65536, 65538, 19, 65537, 65539, 18, 65537, 65540, 18, 65537, 65541, 18, 65539 )
+
+[node name="CurtainShop" parent="." instance=ExtResource( 4 )]
+z_index = 1
+tile_data = PoolIntArray( -131072, 20, 65537, -131069, 20, 65537, -65536, 20, 131073, -65533, 20, 131073, 1, 20, 1, 2, 20, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -0.5 )
+visible = false
+position = Vector2( 63.5, -32.5 )
 shape = SubResource( 1 )
 
 [node name="ShopArea" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShopArea"]
-position = Vector2( 2.5, 2 )
+position = Vector2( 63, -14.5 )
 shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -43.0
-margin_top = -59.0
-margin_right = 49.0
-margin_bottom = -27.0
+anchor_bottom = 0.5
+margin_left = 18.0
+margin_top = -40.0
+margin_right = 110.0
+margin_bottom = -8.0
 theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "SHOP"
+align = 1
+valign = 1
 
 [connection signal="body_entered" from="ShopArea" to="." method="_on_ShopArea_body_entered"]

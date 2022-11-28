@@ -859,7 +859,6 @@ script = ExtResource( 2 )
 _debug = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-radius = 20.0
 
 [node name="Detection" type="Node2D" parent="."]
 position = Vector2( -10, 0 )
