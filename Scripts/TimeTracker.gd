@@ -4,10 +4,11 @@ extends Node
 var rng = RandomNumberGenerator.new()
 
 enum day_time {MORNING,AFTERNOON,NIGHT}
-var max_days = 30
+var max_days = 1
 var current_day = 1
 var day_actions = 3
 var current_time = day_time.MORNING
+var winner : Neighbourgood.HouseClass = null
 
 var min_anger_attack = 25
 var rng_attack_threshold = 50
@@ -27,10 +28,13 @@ func get_days_to_contest():
 	return max_days - current_day
 
 func end_turn():
+	# For testing after atacking one house
+#	winner = choose_winner()
 	if current_time == day_time.NIGHT:
 		next_day()
 		if current_day > max_days:
 			# TODO: Game Over
+			winner = choose_winner()
 			pass
 		else:
 			current_time = day_time.MORNING
@@ -38,10 +42,10 @@ func end_turn():
 		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
-			simulate_attacks_to_player()
+#			simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
-			simulate_attacks_to_player()
+#			simulate_attacks_to_player()
 	print(get_current_time())
 	
 	
@@ -116,7 +120,17 @@ func fix_objects():
 					else:
 						if object.resistance < object.max_resistance:
 							object.resistance += 1
-						
+
+# Search the house that has the maximum beauty points						
+func choose_winner():
+	var houses = Neighbourgood.houses
+	var max_beauty_points = -1
+	var winner_house = null
+	for h in houses:
+		if h.current_beauty_points > max_beauty_points:
+			max_beauty_points = h.current_beauty_points
+			winner_house = h
+	return winner_house
 
 func simulate_attacks_to_player():
 	var attacks_today = 0

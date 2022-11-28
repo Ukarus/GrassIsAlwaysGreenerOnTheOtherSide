@@ -142,10 +142,8 @@ func load_houses(jaus):
 		var new_house = HouseClass.new()
 		new_house.houseName = h.houseName
 		new_house.owner_name = h.ownerName
-#		new_house.owner_anger = 60 + randi() % 100 - 60
-#		new_house.owner_power = 60 + randi() % 100 - 60
-		new_house.owner_anger = 100
-		new_house.owner_power = 100
+		new_house.owner_anger = 60 + randi() % 100 - 60
+		new_house.owner_power = 60 + randi() % 100 - 60
 		# randomly set's the starting beauty points between 25 and 85
 		new_house.current_beauty_points = h.current_beauty_points
 		new_house.local_position = h.position

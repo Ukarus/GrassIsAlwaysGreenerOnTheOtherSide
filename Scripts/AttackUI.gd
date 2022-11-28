@@ -103,7 +103,6 @@ func _on_RepairList_item_activated(index):
 		var object_to_repair = objects[index]
 		var currency = PlayerGlobalData.vandal_currency
 		if currency - object_to_repair.price_to_repair > 0:
-			print('repairing object')
 			object_to_repair.repair()
 			Neighbourgood.player_house.update_house_points(0)
 			repair_list.remove_item(index)

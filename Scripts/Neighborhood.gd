@@ -1,5 +1,6 @@
 extends Node
 
+export (PackedScene) var win_scene
 
 onready var attack_ui = $CanvasLayer/AttackUI
 onready var character = $Character
@@ -20,6 +21,8 @@ var current_ui = UI_OPTIONS.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	if TimeTracker.winner != null:
+		get_tree().change_scene("res://Scenes/UI/EndGameScene.tscn")
 	popup_container.hide()
 	shop_list.hide()
 	attack_ui.hide()
