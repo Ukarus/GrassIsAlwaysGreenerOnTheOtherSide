@@ -514,17 +514,6 @@ margin_top = -2.0
 margin_right = 2.0
 margin_bottom = -2.0
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -167.0
-margin_right = 20.0
-margin_bottom = -153.0
-text = "Garden 1"
-
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
 [node name="door" parent="InteractiveObjects" instance=ExtResource( 11 )]

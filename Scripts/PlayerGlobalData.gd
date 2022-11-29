@@ -20,7 +20,7 @@ var flamethrower = preload("res://Scenes/Items/flamethrower.tscn")
 var eggs = preload("res://Scenes/Items/eggs.tscn")
 var spray = preload("res://Scenes/Items/spray.tscn")
 var vandal_currency = 0
-var player_neighbour_pos = Vector2(170, 258)
+var player_neighbour_pos = Vector2.ZERO
 
 var available_items = [
 	axe,

@@ -31,6 +31,7 @@ var current_item_index = 0
 
 onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
+export (Rect2) var map_limits
 
 signal changed_item_equipped
 
@@ -93,6 +94,13 @@ func move_hitbox(direction: String):
 
 func move_to_direction(direction: String):
 	var velocity = move_and_slide(vector_directions[direction] * speed)
+	if map_limits != null:
+		var end = map_limits.end
+		var start = map_limits.position
+		if velocity.x != 0:
+			global_position.x = clamp(global_position.x, start.x, end.x)
+		if velocity.y != 0:
+			global_position.y = clamp(global_position.y, start.y, end.y)
 	# Check that we're moving
 	if velocity.length_squared() > 0.5:
 		state_machine.travel("walk_" + direction)

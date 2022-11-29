@@ -22,14 +22,15 @@ margin_bottom = 176.0
 
 [node name="Label" type="Label" parent="VSplitContainer"]
 margin_right = 281.0
-margin_bottom = 32.0
+margin_bottom = 26.0
 theme = ExtResource( 2 )
 text = "House 1"
 
 [node name="PopularityBar" type="ProgressBar" parent="VSplitContainer"]
-margin_top = 44.0
+margin_top = 38.0
 margin_right = 281.0
-margin_bottom = 58.0
+margin_bottom = 66.0
+theme = ExtResource( 2 )
 
 [node name="ItemList" type="ItemList" parent="VSplitContainer"]
 margin_top = 90.0

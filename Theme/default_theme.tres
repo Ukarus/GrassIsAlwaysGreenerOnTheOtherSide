@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=12 format=2]
 
 [ext_resource path="res://Theme/default_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/uipack_fixed/PNG/blue_button00.png" type="Texture" id=2]
@@ -30,6 +30,10 @@ bg_color = Color( 0.933333, 0.933333, 0.933333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 0.85098, 0.227451, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.933333, 0.933333, 0.933333, 1 )
@@ -38,6 +42,22 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.596078, 0.603922, 0.639216, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.654902, 0.654902, 0.654902, 1 )
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.117647, 0.654902, 1, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [resource]
 default_font = ExtResource( 1 )
@@ -57,3 +77,5 @@ ItemList/styles/selected = SubResource( 2 )
 ItemList/styles/selected_focus = SubResource( 2 )
 Panel/styles/panel = SubResource( 1 )
 PanelContainer/styles/panel = SubResource( 4 )
+ProgressBar/styles/bg = SubResource( 8 )
+ProgressBar/styles/fg = SubResource( 9 )
