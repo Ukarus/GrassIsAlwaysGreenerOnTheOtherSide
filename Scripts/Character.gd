@@ -94,7 +94,7 @@ func move_hitbox(direction: String):
 
 func move_to_direction(direction: String):
 	var velocity = move_and_slide(vector_directions[direction] * speed)
-	if map_limits != null:
+	if map_limits != null and map_limits.size != Vector2.ZERO:
 		var end = map_limits.end
 		var start = map_limits.position
 		if velocity.x != 0:
