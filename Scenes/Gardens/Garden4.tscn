@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/grass.png" type="Texture" id=2]
-[ext_resource path="res://Objects/Doggo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Garden.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GardenAttackUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/house.png" type="Texture" id=6]
@@ -478,12 +477,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [sub_resource type="RectangleShape2D" id=55]
 extents = Vector2( 21.9995, 510.5 )
 
-[sub_resource type="NavigationPolygon" id=56]
-vertices = PoolVector2Array( 70, 489, 75, 71, 181, 73, 185, 300, 956, 488, 843, 301, 843, 68, 954, 68 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 5, 6, 7, 4 ), PoolIntArray( 5, 3, 3 ) ]
-outlines = [ PoolVector2Array( 843, 68, 954, 68, 956, 488, 70, 489, 75, 71, 181, 73, 185, 300, 185, 300, 843, 301 ) ]
-
-[node name="Garden3" type="Node"]
+[node name="Garden4" type="Node"]
 script = ExtResource( 4 )
 garden_timer = 15
 
@@ -538,46 +532,28 @@ position = Vector2( 344, 240 )
 position = Vector2( 664, 240 )
 
 [node name="GardenGnome" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 408, 445 )
-
-[node name="GardenGnome2" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 104, 136 )
+position = Vector2( 415, 298 )
 
 [node name="GardenGnome3" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 584, 445 )
-
-[node name="GardenGnome4" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 896, 135 )
+position = Vector2( 591, 298 )
 
 [node name="Grass2" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 276, 458 )
-
-[node name="Grass3" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 196, 457 )
-
-[node name="Grass4" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 115, 455 )
-
-[node name="Grass5" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 108, 220 )
+position = Vector2( 890, 103 )
 
 [node name="Grass6" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 108, 287 )
+position = Vector2( 892, 179 )
 
 [node name="Grass7" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 896, 213 )
+position = Vector2( 890, 255 )
 
-[node name="Grass8" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 897, 283 )
+[node name="Grass3" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 111, 106 )
 
-[node name="Grass9" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 749, 461 )
+[node name="Grass4" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 110, 175 )
 
-[node name="Grass10" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 833, 457 )
-
-[node name="Grass11" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 911, 454 )
+[node name="Grass5" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 110, 250 )
 
 [node name="MapLimits" type="Node2D" parent="."]
 
@@ -602,30 +578,15 @@ rotation = 1.57079
 position = Vector2( -3.99957, 110.5 )
 shape = SubResource( 55 )
 
-[node name="Navigation2D" type="Navigation2D" parent="."]
-cell_size = 2.0
-
-[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-position = Vector2( 1, 10 )
-navpoly = SubResource( 56 )
-
-[node name="Patrol" type="Node2D" parent="Navigation2D"]
-
-[node name="Position2D" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
-position = Vector2( 907, 403 )
-
-[node name="Position2D2" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
-position = Vector2( 149, 410 )
-
-[node name="Position2D3" type="Position2D" parent="Navigation2D/Patrol" groups=["doggo_path"]]
-position = Vector2( 121, 115 )
-
-[node name="Doggo" parent="Navigation2D" instance=ExtResource( 3 )]
-position = Vector2( 915, 199 )
-
 [node name="NightFilter" type="CanvasModulate" parent="."]
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
 position = Vector2( 217, 186 )
+
+[node name="Camera2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 803, 179 )
+
+[node name="Camera3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 511, 176 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
