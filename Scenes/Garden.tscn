@@ -514,17 +514,6 @@ margin_top = -2.0
 margin_right = 2.0
 margin_bottom = -2.0
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -167.0
-margin_right = 20.0
-margin_bottom = -153.0
-text = "Garden 1"
-
 [node name="InteractiveObjects" type="Node2D" parent="."]
 
 [node name="door" parent="InteractiveObjects" instance=ExtResource( 11 )]
@@ -550,8 +539,33 @@ days_to_recover = 4
 position = Vector2( 400, 450 )
 days_to_recover = 3
 
+[node name="Grass2" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 449, 369 )
+days_to_recover = 3
+
+[node name="Grass3" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 548, 369 )
+days_to_recover = 3
+
+[node name="Grass4" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 907, 450 )
+days_to_recover = 3
+
+[node name="Grass5" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 121, 450 )
+days_to_recover = 3
+
 [node name="GardenGnome" parent="InteractiveObjects" instance=ExtResource( 13 )]
 position = Vector2( 627, 450 )
+
+[node name="GardenGnome2" parent="InteractiveObjects" instance=ExtResource( 13 )]
+position = Vector2( 660, 450 )
+
+[node name="GardenGnome3" parent="InteractiveObjects" instance=ExtResource( 13 )]
+position = Vector2( 448, 339 )
+
+[node name="GardenGnome4" parent="InteractiveObjects" instance=ExtResource( 13 )]
+position = Vector2( 548, 344 )
 
 [node name="MapLimits" type="Node2D" parent="."]
 
@@ -596,9 +610,15 @@ position = Vector2( 121, 115 )
 [node name="Doggo" parent="Navigation2D" instance=ExtResource( 3 )]
 position = Vector2( 915, 199 )
 
+[node name="Doggo2" parent="Navigation2D" instance=ExtResource( 3 )]
+position = Vector2( 121, 199 )
+
 [node name="NightFilter" type="CanvasModulate" parent="."]
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
-position = Vector2( 217, 186 )
+position = Vector2( 268, 186 )
+
+[node name="Camera2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 660, 167 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

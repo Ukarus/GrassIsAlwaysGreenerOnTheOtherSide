@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=2]
 
-[ext_resource path="res://Images/male_walkcycle.png" type="Texture" id=1]
+[ext_resource path="res://Images/male_walkcycle_blackbar.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Character.gd" type="Script" id=2]
 [ext_resource path="res://Assets/male_slash.png" type="Texture" id=3]
 

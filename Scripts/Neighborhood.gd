@@ -28,7 +28,14 @@ func _ready():
 	attack_ui.hide()
 	menu_container.hide()
 	attack_ui.connect("flee_from_fight", self, "go_back_to_map")
-	character.position = PlayerGlobalData.player_neighbour_pos
+	if PlayerGlobalData.player_neighbour_pos != Vector2.ZERO:
+		set_character_start_pos()
+	character.set_camera_limits(
+		-1985,
+		227,
+		-357,
+		542
+	)
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
 	if Neighbourgood.houses.size() == 0:
 		Neighbourgood.load_houses(houses_node.get_children())
@@ -134,3 +141,6 @@ func _on_Button_button_up():
 
 func _on_OkButton_button_up():
 	popup_container.hide()
+	
+func set_character_start_pos():
+	character.position = PlayerGlobalData.player_neighbour_pos

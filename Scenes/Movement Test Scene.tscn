@@ -618,6 +618,10 @@ points = PoolVector2Array( 96, 64, 0, 64, 0, 32, 96, 32 )
 
 [node name="Movement test" type="Node"]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -357.0, 543.0 ],
+"_edit_vertical_guides_": [ 220.0, -1983.0 ]
+}
 win_scene = ExtResource( 15 )
 
 [node name="Houses" type="Node2D" parent="."]
@@ -686,7 +690,8 @@ garden_scene = ExtResource( 7 )
 position = Vector2( -2, 212 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
-position = Vector2( 170, 258 )
+position = Vector2( -355, 133 )
+map_limits = Rect2( -1981, -357, 2203, 899 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -768,6 +773,8 @@ tile_data = PoolIntArray( -655442, 0, 0, -655441, 1, 0, -655440, 1, 0, -655439, 
 
 [node name="Shop" parent="." instance=ExtResource( 10 )]
 position = Vector2( -1572, -226 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="item_activated" from="CanvasLayer/MenuContainer/PlayerItemsList" to="." method="_on_PlayerItemsList_item_activated"]
 [connection signal="item_activated" from="CanvasLayer/ShopList" to="." method="_on_ShopList_item_activated"]
