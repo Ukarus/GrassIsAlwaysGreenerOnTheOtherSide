@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Images/wolfsheet3.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Doggo.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/barking.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -857,7 +858,7 @@ tracks/4/keys = {
 [node name="Doggo" type="KinematicBody2D"]
 script = ExtResource( 2 )
 walk_speed = 120
-run_speed = 135
+run_speed = 140
 _debug = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -907,5 +908,8 @@ autostart = true
 [node name="Line2D" type="Line2D" parent="."]
 width = 5.0
 default_color = Color( 0.4, 0.501961, 1, 0.556863 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="Detection/Area2D" to="." method="_on_Area2D_body_entered"]

@@ -33,6 +33,7 @@ onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
 onready var sounds_stream = $SoundsStream
 var flamethrower_sound = preload("res://Assets/Sounds/flamethrower2.ogg")
+var spray = preload("res://Assets/Sounds/spray1.wav")
 export (Rect2) var map_limits
 
 signal changed_item_equipped
@@ -162,5 +163,8 @@ func play_sound(sound_name: String):
 	print('aaaaaa')
 	if sound_name == 'flamethrower' and !sounds_stream.playing:
 		sounds_stream.set_stream(flamethrower_sound)
+		sounds_stream.play()
+	elif sound_name == 'spray' and !sounds_stream.playing:
+		sounds_stream.set_stream(spray)
 		sounds_stream.play()
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/grass.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Scenes/Objects/wall.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Objects/GardenGnome.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Objects/grass.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Music/garden_music.wav" type="AudioStream" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "grass_auto"
@@ -603,5 +604,9 @@ position = Vector2( 915, 199 )
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
 position = Vector2( 217, 186 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

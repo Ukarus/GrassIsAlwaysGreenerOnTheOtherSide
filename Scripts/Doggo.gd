@@ -6,7 +6,7 @@ export(bool) var running = false
 
 export(bool) var _debug = true
 onready var debug_line = $Line2D
-
+onready var audio_stream = $AudioStreamPlayer
 onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 var patrol_path: Array = []  # Path to objective
@@ -117,6 +117,8 @@ func selec_anim():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):
+		if !running:
+			audio_stream.play()
 		patrol_mode = false
 		player = body
 		running = true

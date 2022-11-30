@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/grass.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Music/garden_music.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scripts/Garden.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/GardenAttackUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/house.png" type="Texture" id=6]
@@ -588,5 +589,9 @@ position = Vector2( 803, 179 )
 
 [node name="Camera3" parent="." instance=ExtResource( 9 )]
 position = Vector2( 511, 176 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

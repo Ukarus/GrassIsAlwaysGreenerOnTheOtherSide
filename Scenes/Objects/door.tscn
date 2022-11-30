@@ -168,3 +168,5 @@ duration = 1
 position = Vector2( 0, -15 )
 frames = SubResource( 5 )
 animation = "broken1"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/grass.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/house.png" type="Texture" id=6]
 [ext_resource path="res://Assets/fences_32px.png" type="Texture" id=7]
 [ext_resource path="res://Assets/fence.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Music/garden_music.wav" type="AudioStream" id=9]
 [ext_resource path="res://Scenes/Objects/window.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Objects/door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Objects/wall.tscn" type="PackedScene" id=12]
@@ -626,5 +627,9 @@ position = Vector2( 384, 367 )
 position = Vector2( 603, 359 )
 
 [node name="NightFilter" type="CanvasModulate" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

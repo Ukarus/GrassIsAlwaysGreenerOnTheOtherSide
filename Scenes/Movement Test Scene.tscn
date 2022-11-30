@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Objects/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/AttackUI.tscn" type="PackedScene" id=2]
@@ -13,7 +13,12 @@
 [ext_resource path="res://Theme/shop_list_font.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=12]
 [ext_resource path="res://Scenes/UI/AlertPanel.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Gardens/Garden2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/UI/EndGameScene.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Gardens/Garden5.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Gardens/Garden6.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Gardens/Garden3.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Assets/Music/neighbourhood_music.mp3" type="AudioStream" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -626,55 +631,62 @@ win_scene = ExtResource( 15 )
 
 [node name="Houses" type="Node2D" parent="."]
 
-[node name="House" parent="Houses" instance=ExtResource( 5 )]
+[node name="PlayerHouse" parent="Houses" instance=ExtResource( 5 )]
+position = Vector2( -81, -264 )
+z_index = 1
+ownerName = "James"
+houseName = "Jame's House"
+garden_scene = ExtResource( 8 )
+is_player_house = true
+
+[node name="CollisionShape2D" parent="Houses/PlayerHouse/HouseDetectRadius" index="0"]
+position = Vector2( -2.00049, 186 )
+
+[node name="House1" parent="Houses" instance=ExtResource( 5 )]
 position = Vector2( -816, -267 )
 z_index = 1
+houseName = "JohnHouse"
 garden_scene = ExtResource( 8 )
 
-[node name="CollisionShape2D" parent="Houses/House/HouseDetectRadius" index="0"]
+[node name="CollisionShape2D" parent="Houses/House1/HouseDetectRadius" index="0"]
 position = Vector2( -6, 166 )
-
-[node name="House4" parent="Houses" instance=ExtResource( 5 )]
-position = Vector2( -1504, 459 )
-rotation = -3.14159
-garden_scene = ExtResource( 8 )
-
-[node name="CollisionShape2D" parent="Houses/House4/HouseDetectRadius" index="0"]
-position = Vector2( 4, 202 )
-
-[node name="House3" parent="Houses" instance=ExtResource( 5 )]
-position = Vector2( -74, 453 )
-rotation = -3.14159
-garden_scene = ExtResource( 8 )
-
-[node name="CollisionShape2D" parent="Houses/House3/HouseDetectRadius" index="0"]
-position = Vector2( 2.00002, 184 )
 
 [node name="House2" parent="Houses" instance=ExtResource( 5 )]
 position = Vector2( -815, 457 )
 rotation = 3.14159
 z_index = 1
-ownerName = "David"
-houseName = "House2"
-garden_scene = ExtResource( 8 )
+ownerName = "Jenny"
+houseName = "Jenny's House"
+garden_scene = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Houses/House2/HouseDetectRadius" index="0"]
 position = Vector2( -2.00049, 186 )
 
-[node name="House1" parent="Houses" instance=ExtResource( 5 )]
-position = Vector2( -81, -264 )
-rotation = 6.28318
-z_index = 1
-ownerName = "Player"
-houseName = "Player House"
-garden_scene = ExtResource( 8 )
-is_player_house = true
+[node name="House3" parent="Houses" instance=ExtResource( 5 )]
+position = Vector2( -74, 453 )
+rotation = -3.14159
+ownerName = "Jeremiah"
+houseName = "Jeremiah's House"
+garden_scene = ExtResource( 18 )
 
-[node name="CollisionShape2D" parent="Houses/House1/HouseDetectRadius" index="0"]
-position = Vector2( -2.00049, 186 )
+[node name="CollisionShape2D" parent="Houses/House3/HouseDetectRadius" index="0"]
+position = Vector2( 2.00002, 184 )
+
+[node name="House4" parent="Houses" instance=ExtResource( 5 )]
+position = Vector2( -1504, 459 )
+rotation = -3.14159
+ownerName = "Joseph"
+houseName = "Joseph House"
+garden_scene = ExtResource( 7 )
+
+[node name="CollisionShape2D" parent="Houses/House4/HouseDetectRadius" index="0"]
+position = Vector2( 4, 202 )
 
 [node name="House5" parent="Houses" instance=ExtResource( 5 )]
 position = Vector2( -2380, -262 )
+ownerName = "Julia"
+houseName = "Julia's House"
+garden_scene = ExtResource( 16 )
 
 [node name="CollisionShape2D" parent="Houses/House5/HouseDetectRadius" index="0"]
 position = Vector2( -10, 152 )
@@ -683,8 +695,8 @@ position = Vector2( -10, 152 )
 position = Vector2( -2384, 456 )
 rotation = -3.14159
 ownerName = "Jimmy"
-houseName = "House6"
-garden_scene = ExtResource( 7 )
+houseName = "Jimmy's House"
+garden_scene = ExtResource( 17 )
 
 [node name="CollisionShape2D" parent="Houses/House6/HouseDetectRadius" index="0"]
 position = Vector2( -2, 212 )
@@ -775,16 +787,18 @@ tile_data = PoolIntArray( -655442, 0, 0, -655441, 1, 0, -655440, 1, 0, -655439, 
 position = Vector2( -1572, -226 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+autoplay = true
 
 [connection signal="item_activated" from="CanvasLayer/MenuContainer/PlayerItemsList" to="." method="_on_PlayerItemsList_item_activated"]
 [connection signal="item_activated" from="CanvasLayer/ShopList" to="." method="_on_ShopList_item_activated"]
 [connection signal="button_up" from="CanvasLayer/AlertPanel/OkButton" to="." method="_on_OkButton_button_up"]
 
-[editable path="Houses/House"]
-[editable path="Houses/House4"]
-[editable path="Houses/House3"]
-[editable path="Houses/House2"]
+[editable path="Houses/PlayerHouse"]
 [editable path="Houses/House1"]
+[editable path="Houses/House2"]
+[editable path="Houses/House3"]
+[editable path="Houses/House4"]
 [editable path="Houses/House5"]
 [editable path="Houses/House6"]
 [editable path="CanvasLayer/AlertPanel"]
