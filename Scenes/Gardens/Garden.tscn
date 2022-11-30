@@ -528,11 +528,11 @@ position = Vector2( 268, 244 )
 days_to_recover = 2
 
 [node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 366, 227 )
+position = Vector2( 376, 240 )
 days_to_recover = 4
 
 [node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 724, 231 )
+position = Vector2( 696, 240 )
 days_to_recover = 4
 
 [node name="Grass" parent="InteractiveObjects" instance=ExtResource( 14 )]
