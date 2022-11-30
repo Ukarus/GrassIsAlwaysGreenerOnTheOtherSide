@@ -24,7 +24,7 @@ class HouseObject:
 		
 	func repair():
 		if object_state == ObjectState.DESTROYED:
-			object_state == ObjectState.NORMAL
+			object_state = ObjectState.NORMAL
 			is_destroyed = false
 			resistance = max_resistance
 			days_broken = 0
@@ -48,7 +48,7 @@ class HouseClass:
 				sum += o.points
 		return sum
 	
-	func update_house_points(new_points: int):
+	func update_house_points(_new_points: int):
 		 current_beauty_points = get_beauty_points()
 	
 	func update_anger(anger: int):
@@ -58,7 +58,7 @@ class HouseClass:
 	func repair_object(object_name: String):
 		for o in house_objects:
 			if o.object_name == object_name and o.object_status == ObjectState.DESTROYED:
-				o.object_state == ObjectState.NORMAL
+				o.object_state = ObjectState.NORMAL
 				o.is_destroyed = false
 				o.resistance = o.max_resistance
 				o.days_broken = 0

@@ -111,7 +111,7 @@ func load_house_objects():
 
 func randomize_items():
 	var n_objects = min_objects + randi() % (max_objects - min_objects)
-	for i in range(10):
+	for _i in range(10):
 		var pos = Vector2(x_left + randi() % (x_right - x_left), y_up + randi() % (y_down - y_up))
 		if pos.y < y_mid:
 			var dir = "left" if randf() < 0.5 else "right"
@@ -125,15 +125,13 @@ func randomize_items():
 		
 
 func paint_random_grass():
-	for i in range(10):
+	for _i in range(10):
 		var pos = Vector2(randi() % 27 + 2, randi() % 17 + 2)
 		grass_tilemap.set_cell(pos.x, pos.y, 1)
 
 #func update_house_points(points: int):
 func update_house_points(obj):
-	print('updating house points')
 	var new_points = Neighbourgood.get_new_beauty_points(obj.points)
-#	print(new_points)
 	house_bar.value = new_points
 	Neighbourgood.update_current_house_item_state(obj)
 	Neighbourgood.current_house.update_house_points(new_points)

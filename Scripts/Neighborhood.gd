@@ -13,7 +13,9 @@ onready var shop_items = PlayerGlobalData.shop_items
 onready var inventory_menu = $CanvasLayer/MenuContainer/PlayerItemsList
 onready var menu_container = $CanvasLayer/MenuContainer
 onready var popup_container = $CanvasLayer/AlertPanel
-const houseNode = preload("res://Scenes/House.tscn")
+onready var sound_stream = $SoundStream
+var sound_manager = preload("res://Scripts/Singletons/SoundManager.gd")
+#const houseNode = preload("res://Scenes/House.tscn")
 enum UI_OPTIONS {ATTACK_UI, SHOP_LIST, MENU, NONE}
 var current_ui = UI_OPTIONS.NONE
 
@@ -23,6 +25,8 @@ func _ready():
 	randomize()
 	if TimeTracker.winner != null:
 		get_tree().change_scene("res://Scenes/UI/EndGameScene.tscn")
+	sound_manager = sound_manager.new()
+	sound_manager.audio_stream = sound_stream
 	popup_container.hide()
 	shop_list.hide()
 	attack_ui.hide()
@@ -119,6 +123,8 @@ func _on_Attack_Alert():
 
 func _on_ShopList_item_activated(index):
 	var option = shop_list.get_item_text(index)
+	sound_manager.play_sound('click1')
+	
 	if option == "Back":
 		shop_list.hide()
 		character.allow_movement()
@@ -131,7 +137,9 @@ func _on_ShopList_item_activated(index):
 
 func _on_PlayerItemsList_item_activated(index):
 	var option = inventory_menu.get_item_text(index)
+	
 	if option == "Back":
+		sound_manager.play_sound('click1')
 		menu_container.hide()
 		character.allow_movement()
 		current_ui = UI_OPTIONS.NONE
@@ -145,3 +153,7 @@ func _on_OkButton_button_up():
 	
 func set_character_start_pos():
 	character.position = PlayerGlobalData.player_neighbour_pos
+
+
+func _on_PlayerItemsList_item_selected(_index):
+	sound_manager.play_sound('rollover')

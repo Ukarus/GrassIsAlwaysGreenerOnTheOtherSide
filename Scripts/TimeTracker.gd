@@ -60,7 +60,6 @@ func next_day():
 	
 	# TODO: Check if player house != null
 	var player_house = Neighbourgood.get_player_house()
-	var attacks_alerts = []
 	# Attacks to player
 	print("houses: "+str(Neighbourgood.houses.size()))
 	simulate_attacks_to_player()
@@ -113,7 +112,7 @@ func fix_objects():
 					if object.object_state == Neighbourgood.ObjectState.DESTROYED:
 						object.days_broken += 1
 						if object.days_broken >= object.days_to_recover:
-							object.object_state == Neighbourgood.ObjectState.NORMAL
+							object.object_state = Neighbourgood.ObjectState.NORMAL
 							object.is_destroyed = false
 							object.resistance = object.max_resistance
 							object.days_broken = 0

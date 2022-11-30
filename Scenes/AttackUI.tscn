@@ -4,7 +4,6 @@
 [ext_resource path="res://Scripts/AttackUI.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Gardens/Garden.tscn" type="PackedScene" id=7]
 
-
 [node name="AttackUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,7 +29,7 @@ text = "House 1"
 [node name="PopularityBar" type="ProgressBar" parent="VSplitContainer"]
 margin_top = 38.0
 margin_right = 281.0
-margin_bottom = 66.0
+margin_bottom = 64.0
 theme = ExtResource( 2 )
 
 [node name="ItemList" type="ItemList" parent="VSplitContainer"]
@@ -61,5 +60,9 @@ theme = ExtResource( 2 )
 text = "Items to repair
 "
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="item_activated" from="VSplitContainer/ItemList" to="." method="_on_ItemList_item_activated"]
+[connection signal="item_selected" from="VSplitContainer/ItemList" to="." method="_on_ItemList_item_selected"]
 [connection signal="item_activated" from="RepairControl/RepairList" to="." method="_on_RepairList_item_activated"]
+[connection signal="item_selected" from="RepairControl/RepairList" to="." method="_on_RepairList_item_selected"]

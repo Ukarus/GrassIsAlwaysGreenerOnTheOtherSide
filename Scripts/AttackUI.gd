@@ -16,8 +16,11 @@ onready var house_label = $VSplitContainer/Label
 onready var house_bar = $VSplitContainer/PopularityBar
 onready var repair_control = $RepairControl
 onready var repair_list = $RepairControl/RepairList
+#onready var audio_stream = $AudioStreamPlayer
 enum SUBMENUS {OPTIONS, ATTACK, STATS}
 var active_submenu = SUBMENUS.OPTIONS
+var sound_class = preload("res://Scripts/Singletons/SoundManager.gd")
+var sound_manager = null
 
 signal flee_from_fight
 
@@ -25,6 +28,8 @@ signal flee_from_fight
 func _ready():
 	load_options()
 	set_focus_on_attacks()
+	sound_manager = sound_class.new()
+	sound_manager.audio_stream = $AudioStreamPlayer
 	
 	
 func set_house_label():
@@ -68,6 +73,7 @@ func _input(event):
 			
 func _on_ItemList_item_activated(index):
 	var option = item_list.get_item_text(index)
+	sound_manager.play_sound('click1')
 	
 	if option == "Attack":
 		get_tree().change_scene_to(Neighbourgood.current_house.garden_scene)
@@ -109,4 +115,11 @@ func _on_RepairList_item_activated(index):
 			repair_list.select(0)
 			house_bar.value = Neighbourgood.player_house.current_beauty_points
 			PlayerGlobalData.reduce_vandal_currency(object_to_repair.price_to_repair)
-	
+
+
+func _on_RepairList_item_selected(_index):
+	sound_manager.play_sound('rollover')
+
+
+func _on_ItemList_item_selected(_index):
+	sound_manager.play_sound('rollover')
