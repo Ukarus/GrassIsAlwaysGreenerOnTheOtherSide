@@ -31,7 +31,8 @@ var available_items = [
 ]
 var default_inventory = [
 	axe,
-	rock
+	rock,
+	flamethrower
 ]
 
 var shop_items = []

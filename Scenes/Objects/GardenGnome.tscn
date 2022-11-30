@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Assets/Sounds/Bottle Break.wav" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/InteractableObject.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Objects/FCTManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Images/Gnome/Brokengnome.png" type="Texture" id=4]
@@ -129,3 +130,7 @@ duration = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "normal"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+pitch_scale = 0.88

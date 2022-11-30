@@ -620,7 +620,7 @@ points = PoolVector2Array( 96, 64, 0, 64, 0, 32, 96, 32 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_horizontal_guides_": [ -357.0, 543.0 ],
-"_edit_vertical_guides_": [ 220.0, -1983.0 ]
+"_edit_vertical_guides_": [ 220.0, -2684.0 ]
 }
 win_scene = ExtResource( 15 )
 
@@ -691,7 +691,7 @@ position = Vector2( -2, 212 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( -355, 133 )
-map_limits = Rect2( -1981, -357, 2203, 899 )
+map_limits = Rect2( -2683, -357, 2903, 899 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

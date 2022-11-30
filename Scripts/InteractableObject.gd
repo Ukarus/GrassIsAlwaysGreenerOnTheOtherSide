@@ -12,6 +12,7 @@ export (int) var price_to_repair = 5
 enum ObjectState {NORMAL, DESTROYED}
 onready var animated_sprite = $AnimatedSprite
 onready var animation_player = $AnimationPlayer
+onready var sound_stream = $AudioStreamPlayer
 var current_state = ObjectState.NORMAL
 var object_id = 0
 var is_destroyed : bool = false
@@ -45,6 +46,8 @@ func damage_object(res):
 			o.resistance = resistance
 
 func destroy_object():
+	if sound_stream != null:
+		sound_stream.play()
 	if !multiple_hits:
 		animated_sprite.play("broken")
 		$FCTManager.show_value(points)
@@ -59,6 +62,8 @@ func damage(item):
 	if !is_destroyed and item.can_interact_with_object(object_name):
 		resistance -= 1
 		if multiple_hits:
+			if sound_stream != null:
+				sound_stream.play()
 			damage_object(resistance)
 		if item.has_durability:
 			item.reduce_durability()

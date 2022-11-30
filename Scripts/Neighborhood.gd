@@ -31,11 +31,12 @@ func _ready():
 	if PlayerGlobalData.player_neighbour_pos != Vector2.ZERO:
 		set_character_start_pos()
 	character.set_camera_limits(
-		-1985,
+		-2683,
 		227,
 		-357,
 		542
 	)
+	character.speed = 300
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
 	if Neighbourgood.houses.size() == 0:
 		Neighbourgood.load_houses(houses_node.get_children())

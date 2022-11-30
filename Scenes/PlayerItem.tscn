@@ -7,3 +7,5 @@
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 item_name = "player_item"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

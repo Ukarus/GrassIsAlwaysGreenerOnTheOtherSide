@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var speed = 300
+export (int) var speed = 200
 var directions = ["idle_down","idle_up","idle_left","idle_right"]
 var dir = 0
 var state_machine
@@ -31,6 +31,8 @@ var current_item_index = 0
 
 onready var hitbox = $HitBoxArea
 onready var camera = $Camera2D
+onready var sounds_stream = $SoundsStream
+var flamethrower_sound = preload("res://Assets/Sounds/flamethrower2.ogg")
 export (Rect2) var map_limits
 
 signal changed_item_equipped
@@ -80,6 +82,8 @@ func _physics_process(_delta):
 	elif Input.is_action_just_pressed("use_object"):
 		if item_equipped == null:
 			return
+		play_sound(item_equipped.item_name)
+#		item_equipped.play_sound()
 		for obj in objects:
 			obj.damage(item_equipped)
 	elif Input.is_action_just_pressed("next_item"):
@@ -153,3 +157,10 @@ func _on_HitBoxArea_body_entered(body):
 
 func _on_HitBoxArea_body_exited(_body):
 	objects.pop_back()
+
+func play_sound(sound_name: String):
+	print('aaaaaa')
+	if sound_name == 'flamethrower' and !sounds_stream.playing:
+		sounds_stream.set_stream(flamethrower_sound)
+		sounds_stream.play()
+		
