@@ -483,9 +483,9 @@ vertices = PoolVector2Array( 70, 489, 75, 71, 181, 73, 185, 300, 956, 488, 843, 
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 5, 6, 7, 4 ), PoolIntArray( 5, 3, 3 ) ]
 outlines = [ PoolVector2Array( 843, 68, 954, 68, 956, 488, 70, 489, 75, 71, 181, 73, 185, 300, 185, 300, 843, 301 ) ]
 
-[node name="Garden" type="Node"]
+[node name="Garden5" type="Node"]
 script = ExtResource( 4 )
-garden_timer = 90
+garden_timer = 15
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 533, 573 )
@@ -520,52 +520,70 @@ margin_bottom = -2.0
 position = Vector2( 500, 277 )
 
 [node name="wall" parent="InteractiveObjects" instance=ExtResource( 12 )]
-position = Vector2( 596, 247 )
+position = Vector2( 560, 248 )
 days_to_recover = 2
 
 [node name="wall2" parent="InteractiveObjects" instance=ExtResource( 12 )]
-position = Vector2( 268, 244 )
+position = Vector2( 440, 248 )
+days_to_recover = 2
+
+[node name="wall3" parent="InteractiveObjects" instance=ExtResource( 12 )]
+position = Vector2( 240, 248 )
+days_to_recover = 2
+
+[node name="wall4" parent="InteractiveObjects" instance=ExtResource( 12 )]
+position = Vector2( 760, 232 )
 days_to_recover = 2
 
 [node name="window" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 366, 227 )
+position = Vector2( 344, 240 )
 days_to_recover = 4
 
 [node name="window2" parent="InteractiveObjects" instance=ExtResource( 10 )]
-position = Vector2( 724, 231 )
+position = Vector2( 664, 240 )
 days_to_recover = 4
 
 [node name="Grass" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 400, 450 )
+position = Vector2( 432, 344 )
 days_to_recover = 3
 
 [node name="Grass2" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 449, 369 )
+position = Vector2( 336, 336 )
 days_to_recover = 3
 
 [node name="Grass3" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 548, 369 )
+position = Vector2( 592, 336 )
 days_to_recover = 3
 
 [node name="Grass4" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 907, 450 )
+position = Vector2( 888, 336 )
 days_to_recover = 3
 
 [node name="Grass5" parent="InteractiveObjects" instance=ExtResource( 14 )]
-position = Vector2( 121, 450 )
+position = Vector2( 160, 336 )
+days_to_recover = 3
+
+[node name="Grass6" parent="InteractiveObjects" instance=ExtResource( 14 )]
+position = Vector2( 728, 336 )
 days_to_recover = 3
 
 [node name="GardenGnome" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 627, 450 )
+position = Vector2( 872, 176 )
 
 [node name="GardenGnome2" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 660, 450 )
+position = Vector2( 896, 112 )
 
 [node name="GardenGnome3" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 448, 339 )
+position = Vector2( 128, 96 )
 
 [node name="GardenGnome4" parent="InteractiveObjects" instance=ExtResource( 13 )]
-position = Vector2( 548, 344 )
+position = Vector2( 88, 136 )
+
+[node name="GardenGnome5" parent="InteractiveObjects" instance=ExtResource( 13 )]
+position = Vector2( 160, 136 )
+
+[node name="GardenGnome6" parent="InteractiveObjects" instance=ExtResource( 13 )]
+position = Vector2( 944, 168 )
 
 [node name="MapLimits" type="Node2D" parent="."]
 
@@ -594,6 +612,7 @@ shape = SubResource( 55 )
 cell_size = 2.0
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( 0, 8 )
 navpoly = SubResource( 56 )
 
 [node name="Patrol" type="Node2D" parent="Navigation2D"]
@@ -613,12 +632,21 @@ position = Vector2( 915, 199 )
 [node name="Doggo2" parent="Navigation2D" instance=ExtResource( 3 )]
 position = Vector2( 121, 199 )
 
+[node name="Doggo3" parent="Navigation2D" instance=ExtResource( 3 )]
+position = Vector2( 240, 344 )
+
+[node name="Doggo4" parent="Navigation2D" instance=ExtResource( 3 )]
+position = Vector2( 800, 336 )
+
 [node name="NightFilter" type="CanvasModulate" parent="."]
 
 [node name="Camera" parent="." instance=ExtResource( 9 )]
-position = Vector2( 268, 186 )
+position = Vector2( 208, 64 )
+
+[node name="Camera3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 504, 120 )
 
 [node name="Camera2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 660, 167 )
+position = Vector2( 824, 72 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
