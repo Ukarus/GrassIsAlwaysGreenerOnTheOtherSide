@@ -29,8 +29,6 @@ func get_days_to_contest():
 
 func end_turn():
 	# For testing after atacking one house
-#	winner = choose_winner()
-	simulate_attacks_to_player()
 	if current_time == day_time.NIGHT:
 		next_day()
 		if current_day > max_days:

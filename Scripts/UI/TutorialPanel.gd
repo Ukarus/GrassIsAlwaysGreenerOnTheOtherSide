@@ -3,6 +3,10 @@ extends Control
 onready var text_label = $TutorialPanel/TextLabel
 onready var button = $TutorialPanel/Button
 onready var img_panel = $ImagePanel
+onready var sound_stream = $AudioStreamPlayer
+
+var sound_class = preload("res://Scripts/Singletons/SoundManager.gd")
+var sound_manager = null
 export (Array, Dictionary) var dialogue = [] 
 var dialogue_index = 0
 var current_dialogue: Dictionary = {}
@@ -11,6 +15,8 @@ signal tutorial_done
 
 func _ready():
 	img_panel.hide()
+	sound_manager = sound_class.new()
+	sound_manager.audio_stream = $AudioStreamPlayer
 
 func show_dialogue():
 #	get_focus_owner()
@@ -23,6 +29,7 @@ func show_dialogue():
 	text_label.text = current_dialogue["text"]
 
 func next_dialogue():
+	sound_manager.play_sound('click1')
 	if dialogue_index + 1 > dialogue.size() - 1:
 		emit_signal("tutorial_done")
 		return

@@ -70,4 +70,6 @@ margin_bottom = 357.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="button_up" from="TutorialPanel/Button" to="." method="_on_Button_button_up"]
