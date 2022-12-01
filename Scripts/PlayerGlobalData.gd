@@ -1,12 +1,5 @@
 extends Node
 
-#export (String) var item_name
-#export (Array, String) var objects_to_interact
-#export (bool) var has_durability = false
-#export (int) var durability = 5
-#export (int) var max_durability = 5
-#export (int) var price = 5
-
 class PlayerItem:
 	var item_name : String
 	var durability : int
@@ -40,7 +33,7 @@ var inventory = []
 var last_house_attacked
 
 func _ready():
-	vandal_currency = 10 + randi() % 40
+	vandal_currency = 10 + randi() % (45 - 10)
 	load_shop_items()
 	load_inventory()
 

@@ -86,7 +86,8 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("use_object"):
 		if item_equipped == null:
 			return
-		play_sound(item_equipped.item_name)
+		if objects.size() > 0:
+			play_sound(item_equipped.item_name)
 		for obj in objects:
 			obj.damage(item_equipped)
 	if Input.is_action_just_pressed("next_item"):

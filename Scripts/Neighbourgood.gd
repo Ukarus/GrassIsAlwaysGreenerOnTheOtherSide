@@ -48,8 +48,9 @@ class HouseClass:
 				sum += o.points
 		return sum
 	
-	func update_house_points(_new_points: int):
+	func update_house_points(new_points: int):
 		 current_beauty_points = get_beauty_points()
+		#  current_beauty_points = new_points
 	
 	func update_anger(anger: int):
 		owner_anger += anger
@@ -76,6 +77,8 @@ class HouseClass:
 		var target_object = available_objects[randi() % available_objects.size()]
 		target_object.destroy()
 		
+	func repair_house(points: int):
+		current_beauty_points += points
 
 const OBJECTS_DEF = [
 	{
@@ -133,10 +136,9 @@ func load_houses(jaus):
 		var new_house = HouseClass.new()
 		new_house.houseName = h.houseName
 		new_house.owner_name = h.ownerName
-		new_house.owner_anger = 60 + randi() % 100 - 60
-		new_house.owner_power = 60 + randi() % 100 - 60
+		new_house.owner_anger = 5 + randi() % 50
+		new_house.owner_power = 5 + randi() % 50
 		# randomly set's the starting beauty points between 25 and 85
-		new_house.current_beauty_points = h.current_beauty_points
 		new_house.local_position = h.position
 		new_house.is_player_house = h.is_player_house
 		new_house.garden_scene = h.garden_scene
@@ -155,6 +157,7 @@ func load_houses(jaus):
 			house_object.instance_id = house_object.get_instance_id()
 			o.append(house_object)
 		new_house.house_objects = o
+		new_house.current_beauty_points = new_house.get_beauty_points()
 		# load_house_objects(new_house)
 		if new_house.is_player_house:
 			player_house = new_house

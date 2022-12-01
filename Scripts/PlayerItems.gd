@@ -23,7 +23,5 @@ func reduce_durability():
 		emit_signal("item_depleted", item_name)
 
 func play_sound():
-	print(audio_stream)
 	if audio_stream != null:
-		print('playing sound')
 		audio_stream.play()

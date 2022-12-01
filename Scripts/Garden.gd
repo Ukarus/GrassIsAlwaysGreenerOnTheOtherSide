@@ -41,11 +41,7 @@ func _ready():
 	set_item_texture(character.item_equipped.texture)
 	
 	for i in character.inventory:
-		i.connect("item_depleted", self, "set_item_depleted")
-	# DEBUG: list objects
-	for o in objects:
-		print(o.object_name + ": " + ObjectState.keys()[o.object_state])
-	
+		i.connect("item_depleted", self, "set_item_depleted")	
 	# Connect signals of the interactive objects
 	for o in interactive_objects.get_children():
 		o.connect("object_destroyed", self, "update_house_points")

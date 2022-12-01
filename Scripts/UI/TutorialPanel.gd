@@ -32,4 +32,3 @@ func next_dialogue():
 
 func _on_Button_button_up():
 	next_dialogue()
-	print('asasd')

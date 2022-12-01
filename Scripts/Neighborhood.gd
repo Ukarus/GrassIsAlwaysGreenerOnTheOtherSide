@@ -46,7 +46,7 @@ func _ready():
 		-357,
 		542
 	)
-	character.speed = 300
+	character.speed = 325
 	currency_label.text = "Vandal Currency: ${t}".format({"t": PlayerGlobalData.vandal_currency})
 	if Neighbourgood.houses.size() == 0:
 		Neighbourgood.load_houses(houses_node.get_children())
@@ -93,8 +93,12 @@ func _process(_delta):
 func go_back_to_map():
 	if current_ui == UI_OPTIONS.ATTACK_UI:
 		current_ui = UI_OPTIONS.NONE
+		attack_ui.release_focus()
 		attack_ui.hide()
 		character.allow_movement()
+		var attack_data = TimeTracker.attacks_alerts
+		if attack_data.size() > 0:
+			popup_container.get_node("OkButton").grab_focus()
 
 func _on_HouseDetectRadius_body_entered(house):
 	current_ui = UI_OPTIONS.ATTACK_UI
@@ -125,7 +129,7 @@ func _on_Attack_Alert():
 		"op": alert["dmg"]
 	})
 	popup_container.get_node("AlertLabel").text = alert_string
-	TimeTracker.reset_attack_alerts()
+#	TimeTracker.reset_attack_alerts()
 
 func _on_ShopList_item_activated(index):
 	var option = shop_list.get_item_text(index)
@@ -155,10 +159,12 @@ func _on_PlayerItemsList_item_activated(index):
 
 func _on_Button_button_up():
 	popup_container.hide()
+	TimeTracker.reset_attack_alerts()
 
 
 func _on_OkButton_button_up():
 	popup_container.hide()
+	TimeTracker.reset_attack_alerts()
 	
 func set_character_start_pos():
 	character.position = PlayerGlobalData.player_neighbour_pos

@@ -30,6 +30,7 @@ func get_days_to_contest():
 func end_turn():
 	# For testing after atacking one house
 #	winner = choose_winner()
+	simulate_attacks_to_player()
 	if current_time == day_time.NIGHT:
 		next_day()
 		if current_day > max_days:
@@ -138,12 +139,14 @@ func simulate_attacks_to_player():
 			else:
 				var target_object = player_house.house_objects[rng.randi() % player_house.house_objects.size() ]
 				target_object.destroy()
+			var dmg = (5 + randi() % 45)
+			var min_dmg = max(player_house.current_beauty_points - dmg, 0)
 			# Attack player
-			player_house.current_beauty_points -= house.owner_power
+			player_house.current_beauty_points = min_dmg
 			house.update_anger(-25)
 			attacks_today += 1
 			attacks_alerts.append({
 				"neighbour_name": house.owner_name,
-				"dmg": str(house.owner_power)
+				"dmg": str(dmg)
 			})
 			print(house.owner_name + " has attacked your house for "+ str(house.owner_power) + " damage.")

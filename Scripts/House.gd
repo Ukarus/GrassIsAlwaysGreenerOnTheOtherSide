@@ -33,4 +33,3 @@ func _ready():
 		var garden_objects = garden.get_node("InteractiveObjects")
 		if objects != null:
 			objects = garden_objects.get_children()
-#		print(garden.get_node("InteractiveObjects"))
