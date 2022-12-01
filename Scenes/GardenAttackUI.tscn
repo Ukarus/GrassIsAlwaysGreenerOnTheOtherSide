@@ -20,6 +20,7 @@ margin_bottom = 104.0
 margin_right = 174.0
 margin_bottom = 26.0
 theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 text = "House 1"
 align = 1
 
