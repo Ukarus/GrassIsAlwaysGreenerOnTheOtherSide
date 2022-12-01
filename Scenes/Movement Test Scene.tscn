@@ -19,7 +19,7 @@
 [ext_resource path="res://Scenes/Gardens/Garden6.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Gardens/Garden3.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Music/neighbourhood_music.mp3" type="AudioStream" id=19]
-[ext_resource path="res://Theme/neighbourhood_font.tres" type="DynamicFont" id=20]
+[ext_resource path="res://Scenes/UI/TutorialPanel.tscn" type="PackedScene" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -648,12 +648,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -76.0
-margin_top = 30.0
-margin_right = 77.0
-margin_bottom = 60.0
+margin_left = -103.5
+margin_top = 33.0
+margin_right = 103.5
+margin_bottom = 63.0
 theme = ExtResource( 12 )
-custom_fonts/font = ExtResource( 20 )
 text = "Player House"
 align = 1
 valign = 1
@@ -731,6 +730,7 @@ margin_top = 56.0
 margin_right = -33.0
 margin_bottom = 88.0
 theme = ExtResource( 12 )
+custom_colors/font_color = Color( 0.862745, 0.956863, 1, 1 )
 text = "Vandal Currency"
 
 [node name="MenuContainer" type="VSplitContainer" parent="CanvasLayer"]
@@ -777,6 +777,9 @@ custom_fonts/font = ExtResource( 11 )
 
 [node name="AlertPanel" parent="CanvasLayer" instance=ExtResource( 13 )]
 
+[node name="TutorialPanel" parent="CanvasLayer" instance=ExtResource( 21 )]
+visible = false
+
 [node name="modernCity" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
 cell_size = Vector2( 32, 32 )
@@ -805,6 +808,7 @@ position = Vector2( -1572, -226 )
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
+volume_db = -32.618
 autoplay = true
 
 [node name="SoundStream" type="AudioStreamPlayer" parent="."]

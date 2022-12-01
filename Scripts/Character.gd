@@ -160,7 +160,6 @@ func _on_HitBoxArea_body_exited(_body):
 	objects.pop_back()
 
 func play_sound(sound_name: String):
-	print('aaaaaa')
 	if sound_name == 'flamethrower' and !sounds_stream.playing:
 		sounds_stream.set_stream(flamethrower_sound)
 		sounds_stream.play()

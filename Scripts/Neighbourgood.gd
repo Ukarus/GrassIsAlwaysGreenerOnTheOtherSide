@@ -88,54 +88,45 @@ const OBJECTS_DEF = [
 		"scene": preload("res://Scenes/Objects/grass.tscn"),
 		"points": 4
 	},
-	
 ]
 var houses : Array = []
 var current_house : HouseClass = null
 # Store a reference for the player house
 var player_house : HouseClass = null
-var houses_data = [
+
+const TUTORIAL_DIALOGUE = [
 	{
-		"owner_name": "John",
-		"house_name": "John's House",
-		"owner_anger": 0,
-		"owner_power": 15,
-		"position": Vector2(497, 170),
-		"is_player_house": false
+		"name": "Hello",
+		"text": "Welcome to Quilicuma, where you will participate on the most beautifulest gardenest contestest\nThe Objective is having more beauty points than your neighbours at the end of the last day",
+		"image": null
 	},
 	{
-		"owner_name": "David",
-		"house_name": "David's House",
-		"owner_anger": 75,
-		"owner_power": 7,
-		"position": Vector2(45, 250),
-		"is_player_house": false
+		"name": "Hello2",
+		"text": "Get closer to any house to vandalize it, buy items to damage the garden on the Shop\n Check the inventory by pressing ESC",
+		"image": preload("res://Images/tutorial/house_attack2.PNG")
 	},
 	{
-		"owner_name": "Player",
-		"house_name": "Player's House",
-		"owner_power": 0,
-		"owner_anger": 0,
-		"position": Vector2(940, 38),
-		"is_player_house": true
+		"name": "Hello3",
+		"text": "Break all the items you can before the timer's up, whenever you break an object you win some vandal currency\nIf you get caugth up you will rise the neighbour's rage bar",
+		"image": preload("res://Images/tutorial/attacking_house.PNG")
 	},
+	{
+		"name": "Hello4",
+		"text": "Sometimes your neighbours get angry at you and will attack you, go to your house and repair it",
+		"image": preload("res://Images/tutorial/repair.PNG")
+	},
+	{
+		"name": "Hello5",
+		"text": "Every time you vandalize a house, time will pass.\nRemember, the grass is always greener on YOUR side",
+		"image": null
+	},
+	
 ]
+
+var is_tutorial_done = false
 
 func _ready():
 	randomize()
-#	for i in range(houses_data.size()):
-#		var new_house = HouseClass.new()
-#		new_house.houseName = houses_data[i]["house_name"]
-#		new_house.owner_name = houses_data[i]["owner_name"]
-#		new_house.owner_anger = houses_data[i]["owner_anger"]
-#		new_house.owner_power = houses_data[i]["owner_power"]
-#		# randomly set's the starting beauty points between 25 and 85
-#		new_house.current_beauty_points = randi() % 60 + 25
-#		new_house.local_position = houses_data[i]["position"]
-#		new_house.is_player_house = houses_data[i]["is_player_house"]
-#		load_house_objects(new_house)
-#		houses.append(new_house)
-#
 
 func load_houses(jaus):
 	for h in jaus:
@@ -182,18 +173,6 @@ func load_house_objects(house):
 		no.days_to_recover = object["days_to_recover"]
 		no.object_state = ObjectState.NORMAL
 		house.house_objects.append(no)
-#func load_house_objects(house: HouseClass):
-#	var n = 2 + randi() % 6
-#	TODO: Have rules so windows are not instanced more than two times
-#	for _i in range(n):
-#		var object = OBJECTS_DEF[ (randi() % OBJECTS_DEF.size()) - 1]
-#		var no = HouseObject.new()
-#		no.instance_id = no.get_instance_id()
-#		no.object_name = object["name"]
-#		no.scene = object["scene"]
-#		no.points = object["points"]
-#		no.object_state = ObjectState.NORMAL
-#		house.house_objects.append(no)
 
 func add_house(house):
 	var new_house = HouseClass.new()
@@ -208,9 +187,6 @@ func get_new_beauty_points(points):
 
 func get_player_house():
 	return player_house
-#	for h in houses:
-#		if h.is_player_house:
-#			return h
 	
 func set_current_house(house_name: String):
 	for h in houses:

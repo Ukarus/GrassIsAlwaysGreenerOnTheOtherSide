@@ -140,7 +140,6 @@ func update_house_points(obj):
 	for o in objects:
 		if o.object_name == obj.name:
 			o.object_state = ObjectState.DESTROYED
-			print(obj.name + " was destroyed")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

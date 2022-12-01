@@ -3,6 +3,6 @@
 [ext_resource path="res://Assets/uipack_fixed/Font/kenvector_future.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 20
-outline_color = Color( 0.0745098, 0.0666667, 0.0666667, 0.396078 )
+size = 22
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )

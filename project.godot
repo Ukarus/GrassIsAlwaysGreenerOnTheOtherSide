@@ -20,6 +20,12 @@ PlayerGlobalData="*res://Scripts/PlayerGlobalData.gd"
 Neighbourgood="*res://Scripts/Neighbourgood.gd"
 TimeTracker="*res://Scripts/TimeTracker.gd"
 
+[display]
+
+window/size/width=1278
+window/size/height=768
+window/size/resizable=false
+
 [editor]
 
 version_control_autoload_on_startup=true

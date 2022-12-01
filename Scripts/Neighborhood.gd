@@ -14,6 +14,7 @@ onready var inventory_menu = $CanvasLayer/MenuContainer/PlayerItemsList
 onready var menu_container = $CanvasLayer/MenuContainer
 onready var popup_container = $CanvasLayer/AlertPanel
 onready var sound_stream = $SoundStream
+onready var tutorial_panel = $CanvasLayer/TutorialPanel
 var sound_manager = preload("res://Scripts/Singletons/SoundManager.gd")
 #const houseNode = preload("res://Scenes/House.tscn")
 enum UI_OPTIONS {ATTACK_UI, SHOP_LIST, MENU, NONE}
@@ -25,6 +26,9 @@ func _ready():
 	randomize()
 	if TimeTracker.winner != null:
 		get_tree().change_scene("res://Scenes/UI/EndGameScene.tscn")
+	if !Neighbourgood.is_tutorial_done:
+		start_tutorial()
+	tutorial_panel.connect("tutorial_done", self, "set_tutorial_done")
 	sound_manager = sound_manager.new()
 	sound_manager.audio_stream = sound_stream
 	popup_container.hide()
@@ -153,7 +157,20 @@ func _on_OkButton_button_up():
 	
 func set_character_start_pos():
 	character.position = PlayerGlobalData.player_neighbour_pos
-
-
+	
 func _on_PlayerItemsList_item_selected(_index):
 	sound_manager.play_sound('rollover')
+
+func set_tutorial_done():
+	Neighbourgood.is_tutorial_done = true
+	character.allow_movement()
+	tutorial_panel.hide()
+
+func start_tutorial():
+	character.stop_movement()
+	character.go_to_idle()
+	tutorial_panel.dialogue = Neighbourgood.TUTORIAL_DIALOGUE
+	tutorial_panel.show()
+	tutorial_panel.grab_focus()
+	tutorial_panel.button.grab_focus()
+	tutorial_panel.show_dialogue()
