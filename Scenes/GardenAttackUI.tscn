@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Theme/default_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Items/axe_32px.png" type="Texture" id=3]
-[ext_resource path="res://Theme/small_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Scenes/UI/TimeDateContainer.tscn" type="PackedScene" id=5]
 
 [node name="GardenAttackUI" type="Control"]
@@ -42,19 +40,19 @@ margin_bottom = 106.0
 
 [node name="Label" type="Label" parent="TimerContainer"]
 margin_right = 186.0
-margin_bottom = 14.0
+margin_bottom = 26.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 text = "Time Left"
 align = 1
 valign = 1
 
 [node name="CountdownLabel" type="Label" parent="TimerContainer"]
-margin_top = 29.0
+margin_top = 38.0
 margin_right = 186.0
-margin_bottom = 55.0
+margin_bottom = 64.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 text = "00:30"
 align = 1
 valign = 1
@@ -67,7 +65,7 @@ margin_top = 40.0
 margin_right = 175.0
 margin_bottom = 72.0
 theme = ExtResource( 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 text = "Equipped item"
 align = 1
 valign = 1

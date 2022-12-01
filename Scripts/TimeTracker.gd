@@ -4,7 +4,7 @@ extends Node
 var rng = RandomNumberGenerator.new()
 
 enum day_time {MORNING,AFTERNOON,NIGHT}
-var max_days = 1
+var max_days = 3
 var current_day = 1
 var day_actions = 3
 var current_time = day_time.MORNING
@@ -42,11 +42,8 @@ func end_turn():
 		# Simulate attacks to player here just for testing
 		if current_time == day_time.MORNING:
 			current_time = day_time.AFTERNOON
-#			simulate_attacks_to_player()
 		elif current_time == day_time.AFTERNOON:
 			current_time = day_time.NIGHT
-#			simulate_attacks_to_player()
-	print(get_current_time())
 	
 	
 func next_day():
@@ -61,7 +58,6 @@ func next_day():
 	# TODO: Check if player house != null
 	var player_house = Neighbourgood.get_player_house()
 	# Attacks to player
-	print("houses: "+str(Neighbourgood.houses.size()))
 	simulate_attacks_to_player()
 	# Attacks between neighbours
 	for house in Neighbourgood.houses:
@@ -80,11 +76,6 @@ func next_day():
 				objective.update_house_points(0)
 				#objective.current_beauty_points -= house.owner_power
 				print(house.owner_name + " has attacked " + objective.owner_name +"'s house and destroyed one "+ target_object.object_name)
-	# Restore beauty points
-	#for house in Neighbourgood.houses:
-	#	if house.is_player_house:
-	#		continue
-	#	house.increase_beauty_points(house.restore_power)
 
 func reset_attack_alerts():
 	attacks_alerts = []
@@ -95,11 +86,8 @@ func fix_objects():
 		if house.is_player_house:
 			continue
 		else:
-			print("Fixing objects from: "+ house.owner_name)
 			# Find broken object
 			for object in house.house_objects:
-				print(object.object_name)
-				
 				if !object.multiple_hits:
 					if object.object_state == Neighbourgood.ObjectState.DESTROYED:
 						object.days_broken += 1
@@ -137,7 +125,6 @@ func simulate_attacks_to_player():
 	# TODO: Check if player house != null
 	var player_house = Neighbourgood.get_player_house()
 	# Attacks to player
-	print("houses: "+str(Neighbourgood.houses.size()))
 	for house in Neighbourgood.houses:
 		# Exit if player house
 		if house.is_player_house:
@@ -160,6 +147,3 @@ func simulate_attacks_to_player():
 				"dmg": str(house.owner_power)
 			})
 			print(house.owner_name + " has attacked your house for "+ str(house.owner_power) + " damage.")
-#	if attacks_alerts.size() > 0:
-#		print('attacking player')
-#		emit_signal("neighbour_attacked_player")

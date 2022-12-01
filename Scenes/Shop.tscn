@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/uipack_fixed/Font/kenvector_future.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Shop.gd" type="Script" id=3]
 [ext_resource path="res://Assets/ModernCity/ModernCityTileMap.tscn" type="PackedScene" id=4]
 
@@ -10,9 +9,6 @@ extents = Vector2( 126.5, 95.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 119, 112.5 )
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 2 )
 
 [node name="Shop" type="StaticBody2D"]
 position = Vector2( 69, 49 )
@@ -50,7 +46,7 @@ margin_top = -40.0
 margin_right = 110.0
 margin_bottom = -8.0
 theme = ExtResource( 1 )
-custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 text = "SHOP"
 align = 1
 valign = 1

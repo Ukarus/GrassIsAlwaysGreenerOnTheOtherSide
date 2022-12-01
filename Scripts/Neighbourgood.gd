@@ -102,7 +102,7 @@ const TUTORIAL_DIALOGUE = [
 	},
 	{
 		"name": "Hello2",
-		"text": "Get closer to any house to vandalize it, buy items to damage the garden on the Shop\n Check the inventory by pressing ESC",
+		"text": "Get closer to any house to vandalize it, buy items to damage the garden on the Shop\n Use the Q and E to change the item equipped\nCheck the inventory by pressing ESC",
 		"image": preload("res://Images/tutorial/house_attack2.PNG")
 	},
 	{

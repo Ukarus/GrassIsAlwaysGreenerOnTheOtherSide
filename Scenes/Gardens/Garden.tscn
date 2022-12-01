@@ -486,7 +486,7 @@ outlines = [ PoolVector2Array( 843, 68, 954, 68, 956, 488, 70, 489, 75, 71, 181,
 
 [node name="Garden" type="Node"]
 script = ExtResource( 4 )
-garden_timer = 90
+garden_timer = 20
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 533, 573 )

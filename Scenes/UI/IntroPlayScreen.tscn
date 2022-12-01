@@ -30,6 +30,7 @@ margin_top = -127.5
 margin_right = 478.0
 margin_bottom = -16.5
 theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0.870588, 0.960784, 1, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "The grass is always greener
 on the other side"
@@ -54,7 +55,7 @@ theme = ExtResource( 2 )
 text = "START"
 
 [node name="ExitButton" type="Button" parent="Background/ButtonsContainer"]
-margin_top = 90.0
+margin_top = 77.0
 margin_right = 159.0
 margin_bottom = 103.0
 theme = ExtResource( 2 )
@@ -62,6 +63,7 @@ text = "Exit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -11.0
 autoplay = true
 
 [connection signal="pressed" from="Background/ButtonsContainer/StartButton" to="Background" method="_on_StartButton_pressed"]

@@ -28,6 +28,8 @@ func _ready():
 		get_tree().change_scene("res://Scenes/UI/EndGameScene.tscn")
 	if !Neighbourgood.is_tutorial_done:
 		start_tutorial()
+	else:
+		tutorial_panel.hide()
 	tutorial_panel.connect("tutorial_done", self, "set_tutorial_done")
 	sound_manager = sound_manager.new()
 	sound_manager.audio_stream = sound_stream
