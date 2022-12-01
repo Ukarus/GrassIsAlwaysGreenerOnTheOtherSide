@@ -137,7 +137,10 @@ func _on_ShopList_item_activated(index):
 		current_ui = UI_OPTIONS.NONE
 	# if we select an item to buy
 	else:
-		PlayerGlobalData.buy_item(PlayerGlobalData.shop_items[index].item_name, 1)
+		var item = PlayerGlobalData.shop_items[index]
+		var currency = PlayerGlobalData.vandal_currency
+		if currency - item.price > 0:
+			PlayerGlobalData.buy_item(PlayerGlobalData.shop_items[index].item_name, 1)
 		load_inventory_menu()
 
 

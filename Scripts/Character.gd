@@ -80,19 +80,20 @@ func _physics_process(_delta):
 	elif Input.is_action_pressed("move_right"):
 		move_to_direction("right")
 		move_hitbox("right")
-	elif Input.is_action_just_pressed("use_object"):
+	else:
+		state_machine.travel(directions[dir])
+
+	if Input.is_action_just_pressed("use_object"):
 		if item_equipped == null:
 			return
 		play_sound(item_equipped.item_name)
-#		item_equipped.play_sound()
 		for obj in objects:
 			obj.damage(item_equipped)
-	elif Input.is_action_just_pressed("next_item"):
+	if Input.is_action_just_pressed("next_item"):
 		equip_next_item()
-	elif Input.is_action_just_pressed("previous_item"):
+	if Input.is_action_just_pressed("previous_item"):
 		equip_previous_item()
-	else:
-		state_machine.travel(directions[dir])
+	
 		
 func move_hitbox(direction: String):
 	hitbox.position = hitbox_dir[direction]
