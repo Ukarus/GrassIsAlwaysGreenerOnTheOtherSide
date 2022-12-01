@@ -1,27 +1,38 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Images/Ending/bad_ending.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UI/EndGameScene.gd" type="Script" id=2]
+[ext_resource path="res://Theme/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Music/ending_song.mp3" type="AudioStream" id=4]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 506, 293 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+
+[node name="Button" type="Button" parent="Control"]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -30.0
-margin_top = -7.0
-margin_right = 30.0
-margin_bottom = 7.0
-theme = ExtResource( 1 )
-text = "YOU WIN"
-valign = 1
+anchor_bottom = 1.0
+margin_left = -107.0
+margin_top = -199.0
+margin_right = 83.0
+margin_bottom = -112.0
+theme = ExtResource( 3 )
+text = "EXIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[connection signal="button_up" from="Control/Button" to="." method="_on_Button_button_up"]

@@ -723,6 +723,7 @@ map_limits = Rect2( -2683, -357, 2903, 899 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VandalCurrencyLabel" type="Label" parent="CanvasLayer"]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -489.0
@@ -774,8 +775,10 @@ custom_colors/font_color = Color( 0.0235294, 0.0196078, 0.0196078, 1 )
 custom_fonts/font = ExtResource( 11 )
 
 [node name="TimeDateContainer" parent="CanvasLayer" instance=ExtResource( 9 )]
+visible = false
 
 [node name="AlertPanel" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
 
 [node name="TutorialPanel" parent="CanvasLayer" instance=ExtResource( 21 )]
 visible = false
